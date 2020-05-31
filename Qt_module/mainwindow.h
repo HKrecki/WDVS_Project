@@ -22,7 +22,14 @@ public:
 private slots:
     void on_SearchDevicePushButton_clicked();
 
+    void on_ConnectPushButton_clicked();
+
+    void on_DisconnectPushButton_clicked();
+
 private:
+    QSerialPort *device;
+
     Ui::MainWindow *ui;
+    void addToLogs(QString messge);
 };
 #endif // MAINWINDOW_H

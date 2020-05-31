@@ -7,14 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>806</width>
-    <height>602</height>
+    <height>617</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout">
+   <layout class="QGridLayout" name="gridLayout_3">
     <item row="0" column="0">
      <widget class="QGroupBox" name="ConnectionGroupBox">
       <property name="title">
@@ -27,6 +27,9 @@
           <string>Search </string>
          </property>
         </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QComboBox" name="DevicesComboBox"/>
        </item>
        <item row="1" column="0">
         <widget class="QPushButton" name="ConnectPushButton">
@@ -42,8 +45,17 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="QComboBox" name="DevicesComboBox"/>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QGroupBox" name="LogGroupBox">
+      <property name="title">
+       <string>Logs</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QTextEdit" name="LogsTextEdit"/>
        </item>
       </layout>
      </widget>
