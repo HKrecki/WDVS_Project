@@ -26,6 +26,8 @@ private slots:
 
     void on_DisconnectPushButton_clicked();
 
+    void readFromPort();
+
 private:
     QSerialPort *device;
 

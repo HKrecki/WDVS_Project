@@ -70,6 +70,8 @@ void MainWindow::on_ConnectPushButton_clicked()
             this->device->setFlowControl(QSerialPort::NoFlowControl);
 
             this->addToLogs("Otwarto port szeregowy ");
+
+            connect(this->device, SIGNAL(readyRead()), this, SLOT(readFromPort()));
         }
         else{
             this->addToLogs("Otwarcie portu nie powiodlo sie ");
@@ -82,12 +84,6 @@ void MainWindow::on_ConnectPushButton_clicked()
 }
 
 
-
-
-
-
-
-
 void MainWindow::on_DisconnectPushButton_clicked()
 {
     if(this->device->isOpen()){
@@ -97,3 +93,21 @@ void MainWindow::on_DisconnectPushButton_clicked()
         this->addToLogs("Port nie jest otwarty");
     }
 }
+
+
+void MainWindow::readFromPort(){
+    while(this->device->canReadLine()){
+        QString line = this->device->readLine();
+        QString terminator = "/r";
+
+        int pos = line.lastIndexOf(terminator);
+
+        this->addToLogs(line.left(pos));
+    }
+
+
+
+}
+
+
+
