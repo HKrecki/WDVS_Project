@@ -20,18 +20,23 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_SearchDevicePushButton_clicked();
+    void on_tabWidget_currentChanged(int index);
 
-    void on_ConnectPushButton_clicked();
+    void on_pushButton_clicked();
 
-    void on_DisconnectPushButton_clicked();
+    void on_tabWidget_tabBarClicked(int index);
+
+    void on_SettingsTabSearchPushButton_clicked();
+
+    void on_SettingsTabConnectPushButton_clicked();
+
+    void on_SettingsTabDisconnectPushButton_clicked();
 
     void readFromPort();
 
 private:
     QSerialPort *device;
-
     Ui::MainWindow *ui;
-    void addToLogs(QString messge);
+    void addToLogs(QString message);
 };
 #endif // MAINWINDOW_H
