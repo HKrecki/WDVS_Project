@@ -18,6 +18,10 @@ float pressureLPSValue = 0;
 float rainfallValue = 0;
 float insolationValue = 0;
 
+float rainfall = 0;
+float insolation = 0;
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -50,11 +54,30 @@ void loop() {
 
   // Rainfall
   rainfallValue = analogRead(rainfallPin);
+  rainfall = map(rainfallValue, 1025, 0, 0, 100);
   
   // Insolation
   insolationValue = analogRead(insolationPin);
+  insolation = map(insolationValue, 0, 1025, 0 , 100);
   
 //-------------------------------------------------------------------------------------------------------------------------
+// Send data frame:
+
+Serial.print("$_");
+Serial.print(temperatureLPSValue);
+Serial.print("_");
+Serial.print(humidityDHTValue);
+Serial.print("_");
+Serial.print(pressureLPSValue);
+Serial.print("_");
+Serial.print(rainfall);
+Serial.print("_");
+Serial.print(insolation);
+Serial.println("_X");
+
+
+
+/*
 // Show value on serial port
   Serial.println("----------------------------------------");
   Serial.print("Temperature(DHT): ");
@@ -79,7 +102,7 @@ void loop() {
 
 
 
-
+*/
 
   delay(2000);
 }

@@ -64,7 +64,11 @@
           </property>
           <layout class="QGridLayout" name="gridLayout_5">
            <item row="0" column="0">
-            <widget class="QTextEdit" name="Logs_TextEdit"/>
+            <widget class="QTextEdit" name="Logs_TextEdit">
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>

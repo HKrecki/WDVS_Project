@@ -38,5 +38,17 @@ private:
     QSerialPort *device;
     Ui::MainWindow *ui;
     void addToLogs(QString message);
+    void initConnectionInformation();
+    void displayConnectionInformation();
+
+    // Connection informations
+    QString connectionStatus;
+    QString baudrate;
+    QString dataBits;
+    QString parity;
+    QString stopBits;
+    QString flowControl;
+
+
 };
 #endif // MAINWINDOW_H
