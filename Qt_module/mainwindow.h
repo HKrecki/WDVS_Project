@@ -8,6 +8,10 @@
 #include <QDateTime>
 #include <QFileDialog>
 #include <QPixmap>
+#include <QDebug>
+
+#include <QFile>
+#include <QTextStream>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -52,6 +56,7 @@ private:
     QString stopBits;
     QString flowControl;
 
-
+    // File to save data
+    // QFile file;
 };
 #endif // MAINWINDOW_H

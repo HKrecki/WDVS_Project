@@ -20,13 +20,12 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 
-    // Inicjalizacja danych o polaczeniu
+    // Inicjalizacja danych po polaczeniu
     initConnectionInformation();
     displayConnectionInformation();
 
 
     this->device = new QSerialPort(this);
-
 
 
 
@@ -201,13 +200,32 @@ void MainWindow::on_SettingsTabDisconnectPushButton_clicked()
 
 void MainWindow::readFromPort()
 {
+    QString currentDateTime;
+
+    // Otwarcie pliku i przygotowanie do zapisu danych
+
+
+    // Mozna dodac pozniej czyszczenie pliku data.txt, jednak do  wykresow im wiecej danych tym lepiej
+    QFile file("../Qt_Module/data.txt");
+    if(!file.open(QFile::WriteOnly | QFile::Text | QIODevice::Append)){
+        qDebug() << "Plik nie jest otwarty";
+    }
+
+    QTextStream out(&file);
+
+
     while(this->device->canReadLine()){
+
+        currentDateTime = QDateTime::currentDateTime().toString("yyyy.mm.dd hh:mm:ss");
         QString line = this->device->readLine();
 
         QString separator = "\r";
         int pos = line.lastIndexOf(separator);
 
         this->addToLogs("Get data: " + line.left(pos));
+
+        // Wczytanie ramki danych do pliku
+        out << currentDateTime + "_" + line;
     }
 }
 
