@@ -27,9 +27,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     this->device = new QSerialPort(this);
 
-
-
-
 }
 
 MainWindow::~MainWindow()
@@ -121,6 +118,61 @@ void MainWindow::setConnectionStatusImage(bool t_connectionStatus)
 
 }
 
+void MainWindow::readFromFile()
+{
+    QFile file("../Qt_Module/data.txt");
+    if(!file.open(QFile::ReadWrite | QFile::Text | QIODevice::Append)){
+        qDebug() << "Plik nie jest otwarty";
+    }
+
+    QTextStream in(&file); // Save to file
+    QString text = in.readAll();
+
+    ui->test_textEdit->setPlainText(text);
+
+    file.close();
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \brief MainWindow::setVariablesFromFileLine
+/// Przydział wartości zmiennych, wydzilonych z ramki danych
+
+void MainWindow::setVariablesFromFileLine()
+{
+    // Podzial ramki danych na czytelne elementy
+    QStringList allDataList = currentRawDataStr.split("_", QString::SkipEmptyParts);
+    QStringList entireDateList;
+
+    // Sprawdzenie poprawnosci przslanych danych
+    if(allDataList.at(1) == "$" && allDataList.at(7) == "X\r\n" && allDataList.count() == 8){
+
+        // Przypisanie wartosci do zmiennych
+        this->fullDateStr = allDataList.at(0);
+        this->temperatureStr = allDataList.at(2);
+        this->humidityStr = allDataList.at(3);
+        this->pressureStr = allDataList.at(4);
+        this->rainfallStr = allDataList.at(5);
+        this->insolationStr = allDataList.at(6);
+    }else{
+        qDebug() << "Przeslana ramka jest niepoprawna";
+    }
+
+    // Podzielenie daty na dzien i godzine
+    entireDateList = fullDateStr.split(" ", QString::SkipEmptyParts);
+    this->dateStr = entireDateList.at(0);
+    this->hourStr = entireDateList.at(1);
+
+    // Przypisaenie wartosci liczbowych do zmiennych
+    this->currentTemperature = temperatureStr.toInt();
+    this->currentHumidity = humidityStr.toInt();
+    this->currentPressure = pressureStr.toFloat();
+    this->currentRainfall = rainfallStr.toInt();
+    this->currentInsolation = insolationStr.toInt();
+
+    // ui->test_textEdit->append(this->temperatureStr);
+
+}
+
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -200,6 +252,7 @@ void MainWindow::on_SettingsTabDisconnectPushButton_clicked()
 
 void MainWindow::readFromPort()
 {
+    // Zmienna przechowujaca aktualna date
     QString currentDateTime;
 
     // Otwarcie pliku i przygotowanie do zapisu danych
@@ -207,11 +260,11 @@ void MainWindow::readFromPort()
 
     // Mozna dodac pozniej czyszczenie pliku data.txt, jednak do  wykresow im wiecej danych tym lepiej
     QFile file("../Qt_Module/data.txt");
-    if(!file.open(QFile::WriteOnly | QFile::Text | QIODevice::Append)){
+    if(!file.open(QFile::ReadWrite | QFile::Text | QIODevice::Append)){
         qDebug() << "Plik nie jest otwarty";
     }
 
-    QTextStream out(&file);
+    QTextStream out(&file); // Save to file
 
 
     while(this->device->canReadLine()){
@@ -224,8 +277,16 @@ void MainWindow::readFromPort()
 
         this->addToLogs("Get data: " + line.left(pos));
 
-        // Wczytanie ramki danych do pliku
+        // Zapis ramki danych do pliku
         out << currentDateTime + "_" + line;
+
+        // Odczyt calej lini i zapis do zmiennej, przeznaczonej do pozniejszego podzielenia
+        currentRawDataStr = currentDateTime+"_"+line;
+
+        // Podzial odczytanej lini na potrzebne elementy(wartosci)
+        this->setVariablesFromFileLine();
+
+
     }
 }
 

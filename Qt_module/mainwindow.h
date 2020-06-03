@@ -48,6 +48,10 @@ private:
     void displayConnectionInformation();
     void setConnectionStatusImage(bool t_connectionStatus);
 
+    void readFromFile();
+
+    void setVariablesFromFileLine();
+
     // Connection informations
     QString connectionStatus;
     QString baudrate;
@@ -57,6 +61,26 @@ private:
     QString flowControl;
 
     // File to save data
-    // QFile file;
+
+    // Variables for last data
+    QString currentRawDataStr;
+
+    QString fullDateStr;
+    QString dateStr;
+    QString hourStr;
+
+    QString startBitStr; // $
+    QString temperatureStr;
+    QString humidityStr;
+    QString pressureStr;
+    QString rainfallStr;
+    QString insolationStr;
+    QString stopBit; // X\r\n
+
+    int currentTemperature = 0;
+    int currentHumidity = 0;
+    float currentPressure = 0.0;
+    int currentRainfall = 0;
+    int currentInsolation = 0;
 };
 #endif // MAINWINDOW_H
