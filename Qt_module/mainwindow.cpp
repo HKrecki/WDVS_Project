@@ -18,6 +18,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+
+
     // Inicjalizacja danych o polaczeniu
     initConnectionInformation();
     displayConnectionInformation();
@@ -80,6 +82,8 @@ void MainWindow::initConnectionInformation()
     this->parity = "---";
     this->stopBits = "---";
     this->flowControl = "---";
+
+    this->setConnectionStatusImage(false);
 }
 
 void MainWindow::displayConnectionInformation()
@@ -94,11 +98,35 @@ void MainWindow::displayConnectionInformation()
     ui->ConnectionInformation_TextEdit->append("Flow control:\t" + this->flowControl);
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \brief MainWindow::setConnectionStatusImage
+/// \param t_connectionStatus - Jeśli polaczenie jest aktywne - true, jesli nie - false
+///
+void MainWindow::setConnectionStatusImage(bool t_connectionStatus)
+{
+    QString status = "OFF";
+
+    if(t_connectionStatus){
+        status = "ON";
+    } else{
+        status = "OFF";
+    }
+
+    QPixmap pix(":/resources/img/wifi"+status+".png");
+
+    int w = ui->ConnectionStatusImage_Label->width();
+    int h = ui->ConnectionStatusImage_Label->height();
+
+    ui->ConnectionStatusImage_Label->setPixmap(pix.scaled(w, h, Qt::KeepAspectRatio));
+    ui->ConnectionStatusImage_Label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+
+}
 
 
-/////////////////////////////////////////////////////////////////////////////
-// Obsluga przycisku polacz: polaczenie i przypisanie informacji i polaczeniu
-/////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \brief MainWindow::on_SettingsTabConnectPushButton_clicked
+///
 void MainWindow::on_SettingsTabConnectPushButton_clicked()
 {
     if(ui->SettingsTabDevices_ComboBox->count() == 0){
@@ -119,6 +147,9 @@ void MainWindow::on_SettingsTabConnectPushButton_clicked()
 
 
             this->addToLogs("The serial port is now open");
+
+            // Ustawienie ikony symbolizujacej status polaczenia - ON
+            setConnectionStatusImage(true);
 
             // Ustawienie informacji dotyczacych polaczenia
             ui->ConnectionInformation_TextEdit->clear();
@@ -160,6 +191,9 @@ void MainWindow::on_SettingsTabDisconnectPushButton_clicked()
     ui->ConnectionInformation_TextEdit->clear();
     this->initConnectionInformation();
     this->displayConnectionInformation();
+
+    // Ustawienie ikony symbolizującej status polaczenia - ON
+    setConnectionStatusImage(false);
 }
 
 

@@ -6,6 +6,8 @@
 #include <QList>
 #include <QSerialPort>
 #include <QDateTime>
+#include <QFileDialog>
+#include <QPixmap>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -40,6 +42,7 @@ private:
     void addToLogs(QString message);
     void initConnectionInformation();
     void displayConnectionInformation();
+    void setConnectionStatusImage(bool t_connectionStatus);
 
     // Connection informations
     QString connectionStatus;
