@@ -80,6 +80,7 @@ void MainWindow::initConnectionInformation()
     this->flowControl = "---";
 
     this->setConnectionStatusImage(false);
+    ui->statusbar->showMessage("Disconnected");
 }
 
 void MainWindow::displayConnectionInformation()
@@ -169,7 +170,7 @@ void MainWindow::setVariablesFromFileLine()
     this->currentRainfall = rainfallStr.toInt();
     this->currentInsolation = insolationStr.toInt();
 
-    // ui->test_textEdit->append(this->temperatureStr);
+    ui->test_textEdit->append(temperatureStr);
 
 }
 
@@ -214,6 +215,7 @@ void MainWindow::on_SettingsTabConnectPushButton_clicked()
 
 
             connect(this->device, SIGNAL(readyRead()), this, SLOT(readFromPort()));
+            ui->statusbar->showMessage("Connected");
         }else{
             this->addToLogs("The opening of the serial port has failed");
         }
