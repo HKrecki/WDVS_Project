@@ -62,7 +62,7 @@ private:
 
     void setVariablesFromFileLine();
 
-    void setWeatherIcon();
+    void setWeatherIcon(int t_insolation, int t_rainfall);
 
     // Connection informations
     QString connectionStatus;
@@ -89,10 +89,10 @@ private:
     QString insolationStr;
     QString stopBit; // X\r\n
 
-    int currentTemperature = 0;
-    int currentHumidity = 0;
-    float currentPressure = 0.0;
-    int currentRainfall = 0;
-    int currentInsolation = 0;
+    double currentTemperature = 0.0;
+    double currentHumidity = 0.0;
+    double currentPressure = 0.0;
+    double currentRainfall = 0.0;
+    double currentInsolation = 0.0;
 };
 #endif // MAINWINDOW_H

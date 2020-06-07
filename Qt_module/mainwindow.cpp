@@ -26,13 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     this->device = new QSerialPort(this);
 
-    QPixmap pix(":/resources/img/weather_icon-16.png");
 
-    int w = ui->WeatherIcon_Label->width();
-    int h = ui->WeatherIcon_Label->height();
-
-    ui->WeatherIcon_Label->setPixmap(pix.scaled(w, h, Qt::KeepAspectRatio));
-    ui->WeatherIcon_Label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
     // Obsulga zegara
     clockTimer = new QTimer(this);
@@ -147,8 +141,7 @@ void MainWindow::readFromFile()
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// \brief MainWindow::setVariablesFromFileLine
-/// Przydział wartości zmiennych, wydzilonych z ramki danych
-
+/// Przydział wartości zmiennych, wydzielonych z ramki danych
 void MainWindow::setVariablesFromFileLine()
 {
     // Podzial ramki danych na czytelne elementy
@@ -174,27 +167,46 @@ void MainWindow::setVariablesFromFileLine()
     this->dateStr = entireDateList.at(0);
     this->hourStr = entireDateList.at(1);
 
+    bool ok; // To check conversion failure
+
     // Przypisaenie wartosci liczbowych do zmiennych liczbowych
-    this->currentTemperature = temperatureStr.toInt();
-    this->currentHumidity = humidityStr.toInt();
-    this->currentPressure = pressureStr.toFloat();
-    this->currentRainfall = rainfallStr.toInt();
-    this->currentInsolation = insolationStr.toInt();
-
-    // ui->test_textEdit->append(temperatureStr);
-
+    this->currentTemperature = temperatureStr.split(" ")[0].toDouble();
+    this->currentHumidity = humidityStr.split(" ")[0].toDouble();
+    this->currentPressure = pressureStr.split(" ")[0].toDouble();
+    this->currentRainfall = rainfallStr.split(" ")[0].toDouble();
+    this->currentInsolation = insolationStr.split(" ")[0].toDouble(&ok);
 }
 
-void MainWindow::setWeatherIcon()
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \brief MainWindow::setWeatherIcon
+/// Ustawienie ikony wizualizującej warunki pogodowe
+void MainWindow::setWeatherIcon(int t_insolation, int t_rainfall)
 {
-    // TODO
+    int w = ui->WeatherIcon_Label->width();
+    int h = ui->WeatherIcon_Label->height();
+
+    // Sloneczna pogoda
+    if(t_insolation > 50 && t_rainfall < 10){
+        // Slonecznie
+        QPixmap pix(":/resources/img/sunny.png");
+        ui->WeatherIcon_Label->setPixmap(pix.scaled(w, h, Qt::KeepAspectRatio));
+    }
+    else if(t_insolation <= 50 && t_rainfall < 10){ // Pochumrno
+        // Pochmurno
+        QPixmap pix(":/resources/img/cloudy.png");
+        ui->WeatherIcon_Label->setPixmap(pix.scaled(w, h, Qt::KeepAspectRatio));
+    }
+    else if(t_rainfall >= 10) { // Deszczowo
+        QPixmap pix(":/resources/img/rain.png");
+        ui->WeatherIcon_Label->setPixmap(pix.scaled(w, h, Qt::KeepAspectRatio));
+    }
+
+    ui->WeatherIcon_Label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 }
-
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// \brief MainWindow::on_SettingsTabConnectPushButton_clicked
-///
+/// Obsługa przycisku połącz - Nawiązanie połączenia z urządzeniem
 void MainWindow::on_SettingsTabConnectPushButton_clicked()
 {
     if(ui->SettingsTabDevices_ComboBox->count() == 0){
@@ -245,9 +257,10 @@ void MainWindow::on_SettingsTabConnectPushButton_clicked()
     this->displayConnectionInformation();
 }
 
-/////////////////////////////////////////////////////////////////////////////
-// Obsluga przycisku rozlacz: polaczenie i przypisanie informacji i polaczeniu
-/////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \brief MainWindow::on_SettingsTabDisconnectPushButton_clicked
+/// Obsługa przycisku rozłącz - Rozłączenie z urządzeniem
 void MainWindow::on_SettingsTabDisconnectPushButton_clicked()
 {
     if(this->device->isOpen()){
@@ -261,13 +274,14 @@ void MainWindow::on_SettingsTabDisconnectPushButton_clicked()
     this->initConnectionInformation();
     this->displayConnectionInformation();
 
-    // Ustawienie ikony symbolizującej status polaczenia - ON
+    // Ustawienie ikony symbolizującej status polaczenia - OFF
     setConnectionStatusImage(false);
 }
 
 
-
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \brief MainWindow::readFromPort
+/// Odczytanie danych z urządzenia
 void MainWindow::readFromPort()
 {
     // Zmienna przechowujaca aktualna date
@@ -276,7 +290,7 @@ void MainWindow::readFromPort()
     // Otwarcie pliku i przygotowanie do zapisu danych
 
 
-    // Mozna dodac pozniej czyszczenie pliku data.txt, jednak do  wykresow im wiecej danych tym lepiej
+    // TODO: Dodac czyszczenie pliku data.txt
     QFile file("../Qt_Module/data.txt");
     if(!file.open(QFile::ReadWrite | QFile::Text | QIODevice::Append)){
         qDebug() << "Plik nie jest otwarty";
@@ -306,16 +320,18 @@ void MainWindow::readFromPort()
         this->setVariablesFromFileLine();
 
         // Ustawienie odpowiedniej wizualizacji pogody
+        setWeatherIcon(currentInsolation, currentRainfall);
 
-        // Ustawienie aktualnej godziny
-
-
+        // Ustawienie aktualnych wartosci warunkow pogodowych
     }
 }
 
 
 
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \brief MainWindow::clockTimerFctn
+/// Obsługa daty wyświetlanej na pulpicie
 void MainWindow::clockTimerFctn()
 {
     QLocale curLocale(QLocale("en_US"));
