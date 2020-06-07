@@ -3,5 +3,7 @@
         <file>img/wifi.png</file>
         <file>img/wifiON.png</file>
         <file>img/wifiOFF.png</file>
+        <file>img/weather_icon-01.png</file>
+        <file>img/weather_icon-16.png</file>
     </qresource>
 </RCC>

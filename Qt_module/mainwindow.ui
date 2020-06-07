@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>892</width>
+    <width>1060</width>
     <height>540</height>
    </rect>
   </property>
@@ -25,6 +25,9 @@
       <property name="cursor">
        <cursorShape>ArrowCursor</cursorShape>
       </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="tabShape">
        <enum>QTabWidget::Rounded</enum>
       </property>
@@ -41,6 +44,10 @@
        <layout class="QGridLayout" name="gridLayout_8">
         <item row="0" column="0">
          <widget class="QFrame" name="frame">
+          <property name="styleSheet">
+           <string notr="true">border-color: rgb(0, 0, 0);
+border: 5px solid black </string>
+          </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
           </property>
@@ -49,17 +56,22 @@
           </property>
           <layout class="QVBoxLayout" name="verticalLayout">
            <item>
-            <widget class="QLabel" name="label_2">
+            <widget class="QLabel" name="DASHBOARD_clock_label">
              <property name="font">
               <font>
-               <pointsize>28</pointsize>
+               <pointsize>35</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
               </font>
              </property>
              <property name="layoutDirection">
               <enum>Qt::LeftToRight</enum>
              </property>
+             <property name="styleSheet">
+              <string notr="true">border:  solid black </string>
+             </property>
              <property name="text">
-              <string>12:30</string>
+              <string/>
              </property>
              <property name="alignment">
               <set>Qt::AlignBottom|Qt::AlignHCenter</set>
@@ -67,14 +79,17 @@
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_3">
+            <widget class="QLabel" name="DASHBOARD_date_label">
              <property name="font">
               <font>
                <pointsize>15</pointsize>
               </font>
              </property>
+             <property name="styleSheet">
+              <string notr="true">border: 0px solid black </string>
+             </property>
              <property name="text">
-              <string> 12 czerwca 2020</string>
+              <string/>
              </property>
              <property name="alignment">
               <set>Qt::AlignHCenter|Qt::AlignTop</set>
@@ -86,32 +101,129 @@
         </item>
         <item row="0" column="1">
          <widget class="QFrame" name="frame_2">
+          <property name="styleSheet">
+           <string notr="true">border-color: rgb(0, 0, 0);
+border: 5px solid black </string>
+          </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
           </property>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
+          <layout class="QGridLayout" name="gridLayout_9">
+           <item row="0" column="0">
+            <widget class="QLabel" name="WeatherIcon_Label">
+             <property name="minimumSize">
+              <size>
+               <width>180</width>
+               <height>180</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border: 0px solid black </string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
         <item row="0" column="2">
          <widget class="QFrame" name="frame_3">
+          <property name="styleSheet">
+           <string notr="true">border-color: rgb(0, 0, 0);
+border: 5px solid black </string>
+          </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
           </property>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
+          <layout class="QGridLayout" name="gridLayout_10">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_4">
+             <property name="font">
+              <font>
+               <pointsize>50</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border: 0px solid black </string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
         <item row="0" column="3">
          <widget class="QFrame" name="frame_4">
+          <property name="styleSheet">
+           <string notr="true">border-color: rgb(0, 0, 0);
+border: 5px solid black </string>
+          </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
           </property>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
+          <property name="lineWidth">
+           <number>1</number>
+          </property>
+          <property name="midLineWidth">
+           <number>0</number>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_11">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_6">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>25</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border: 0px solid black </string>
+             </property>
+             <property name="text">
+              <string>DETAILS</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_5">
+             <property name="font">
+              <font>
+               <pointsize>13</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border: 0px solid black </string>
+             </property>
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
         <item row="1" column="0" colspan="4">
@@ -127,6 +239,9 @@
             <pointsize>12</pointsize>
            </font>
           </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
           <property name="text">
            <string>LAST 4 DAYS</string>
           </property>
@@ -134,42 +249,138 @@
         </item>
         <item row="2" column="0">
          <widget class="QFrame" name="frame_5">
+          <property name="styleSheet">
+           <string notr="true">border-color: rgb(0, 0, 0);
+border: 5px solid black </string>
+          </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
           </property>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
+          <layout class="QGridLayout" name="gridLayout_12">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_7">
+             <property name="font">
+              <font>
+               <pointsize>30</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border: 0px solid black </string>
+             </property>
+             <property name="text">
+              <string>No data</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
         <item row="2" column="1">
          <widget class="QFrame" name="frame_6">
+          <property name="styleSheet">
+           <string notr="true">border-color: rgb(0, 0, 0);
+border: 5px solid black </string>
+          </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
           </property>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
+          <layout class="QGridLayout" name="gridLayout_13">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_8">
+             <property name="font">
+              <font>
+               <pointsize>30</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border: 0px solid black </string>
+             </property>
+             <property name="text">
+              <string>No data</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
         <item row="2" column="2">
          <widget class="QFrame" name="frame_7">
+          <property name="styleSheet">
+           <string notr="true">border-color: rgb(0, 0, 0);
+border: 5px solid black </string>
+          </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
           </property>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
+          <layout class="QGridLayout" name="gridLayout_14">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_9">
+             <property name="font">
+              <font>
+               <pointsize>30</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border: 0px solid black </string>
+             </property>
+             <property name="text">
+              <string>No data</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
         <item row="2" column="3">
          <widget class="QFrame" name="frame_8">
+          <property name="styleSheet">
+           <string notr="true">border-color: rgb(0, 0, 0);
+border: 5px solid black </string>
+          </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
           </property>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
+          <layout class="QGridLayout" name="gridLayout_15">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_10">
+             <property name="font">
+              <font>
+               <pointsize>30</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border: 0px solid black </string>
+             </property>
+             <property name="text">
+              <string>No data</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>
@@ -180,7 +391,72 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_7">
         <item row="0" column="0">
-         <widget class="QTextEdit" name="test_textEdit"/>
+         <widget class="QFrame" name="frame_9">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_16">
+           <item row="0" column="0">
+            <widget class="QFrame" name="frame_11">
+             <property name="styleSheet">
+              <string notr="true">border-color: rgb(0, 0, 0);
+border: 2px solid black </string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QFrame" name="frame_10">
+             <property name="styleSheet">
+              <string notr="true">border-color: rgb(0, 0, 0);
+border: 2px solid black </string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QFrame" name="frame_12">
+             <property name="styleSheet">
+              <string notr="true">border-color: rgb(0, 0, 0);
+border: 2px solid black </string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QFrame" name="frame_13">
+             <property name="styleSheet">
+              <string notr="true">border-color: rgb(0, 0, 0);
+border: 2px solid black </string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -205,6 +481,12 @@
           <layout class="QGridLayout" name="gridLayout_5">
            <item row="0" column="0">
             <widget class="QTextEdit" name="Logs_TextEdit">
+             <property name="minimumSize">
+              <size>
+               <width>600</width>
+               <height>0</height>
+              </size>
+             </property>
              <property name="styleSheet">
               <string notr="true"/>
              </property>
@@ -237,6 +519,9 @@
                <pointsize>12</pointsize>
               </font>
              </property>
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
              <property name="text">
               <string/>
              </property>
@@ -251,6 +536,9 @@
            <font>
             <pointsize>12</pointsize>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
           </property>
           <property name="title">
            <string>Connection control</string>
@@ -268,6 +556,9 @@
               <font>
                <pointsize>12</pointsize>
               </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true"/>
              </property>
              <property name="text">
               <string>Search</string>
@@ -354,7 +645,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>892</width>
+     <width>1060</width>
      <height>20</height>
     </rect>
    </property>

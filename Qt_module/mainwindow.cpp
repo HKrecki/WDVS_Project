@@ -19,7 +19,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
 
-
     // Inicjalizacja danych po polaczeniu
     initConnectionInformation();
     displayConnectionInformation();
@@ -27,6 +26,18 @@ MainWindow::MainWindow(QWidget *parent)
 
     this->device = new QSerialPort(this);
 
+    QPixmap pix(":/resources/img/weather_icon-16.png");
+
+    int w = ui->WeatherIcon_Label->width();
+    int h = ui->WeatherIcon_Label->height();
+
+    ui->WeatherIcon_Label->setPixmap(pix.scaled(w, h, Qt::KeepAspectRatio));
+    ui->WeatherIcon_Label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+
+    // Obsulga zegara
+    clockTimer = new QTimer(this);
+    connect(clockTimer, SIGNAL(timeout()), this, SLOT(clockTimerFctn()));
+    clockTimer->start(1000);
 }
 
 MainWindow::~MainWindow()
@@ -129,7 +140,7 @@ void MainWindow::readFromFile()
     QTextStream in(&file); // Save to file
     QString text = in.readAll();
 
-    ui->test_textEdit->setPlainText(text);
+    // ui->test_textEdit->setPlainText(text);
 
     file.close();
 }
@@ -147,7 +158,7 @@ void MainWindow::setVariablesFromFileLine()
     // Sprawdzenie poprawnosci przslanych danych
     if(allDataList.at(1) == "$" && allDataList.at(7) == "X\r\n" && allDataList.count() == 8){
 
-        // Przypisanie wartosci do zmiennych
+        // Przypisanie wartosci do zmiennych typu QString
         this->fullDateStr = allDataList.at(0);
         this->temperatureStr = allDataList.at(2);
         this->humidityStr = allDataList.at(3);
@@ -163,15 +174,20 @@ void MainWindow::setVariablesFromFileLine()
     this->dateStr = entireDateList.at(0);
     this->hourStr = entireDateList.at(1);
 
-    // Przypisaenie wartosci liczbowych do zmiennych
+    // Przypisaenie wartosci liczbowych do zmiennych liczbowych
     this->currentTemperature = temperatureStr.toInt();
     this->currentHumidity = humidityStr.toInt();
     this->currentPressure = pressureStr.toFloat();
     this->currentRainfall = rainfallStr.toInt();
     this->currentInsolation = insolationStr.toInt();
 
-    ui->test_textEdit->append(temperatureStr);
+    // ui->test_textEdit->append(temperatureStr);
 
+}
+
+void MainWindow::setWeatherIcon()
+{
+    // TODO
 }
 
 
@@ -269,6 +285,7 @@ void MainWindow::readFromPort()
     QTextStream out(&file); // Save to file
 
 
+    // Odczyt danych z urzadzenia
     while(this->device->canReadLine()){
 
         currentDateTime = QDateTime::currentDateTime().toString("yyyy.mm.dd hh:mm:ss");
@@ -288,8 +305,30 @@ void MainWindow::readFromPort()
         // Podzial odczytanej lini na potrzebne elementy(wartosci)
         this->setVariablesFromFileLine();
 
+        // Ustawienie odpowiedniej wizualizacji pogody
+
+        // Ustawienie aktualnej godziny
+
 
     }
+}
+
+
+
+
+void MainWindow::clockTimerFctn()
+{
+    QLocale curLocale(QLocale("en_US"));
+    QLocale::setDefault(curLocale);
+
+    QTime time = QTime::currentTime();
+    QString timeStr = time.toString("hh : mm");
+
+    QDate date = QDate::currentDate();
+    QString englishDate = QLocale().toString(date);
+
+    ui->DASHBOARD_clock_label->setText(timeStr);
+    ui->DASHBOARD_date_label->setText(englishDate);
 }
 
 

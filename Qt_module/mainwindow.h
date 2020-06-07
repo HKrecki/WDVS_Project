@@ -10,8 +10,12 @@
 #include <QPixmap>
 #include <QDebug>
 
+// Obsluga plikow
 #include <QFile>
 #include <QTextStream>
+
+// Obsluga zegara
+#include <QTimer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -40,9 +44,15 @@ private slots:
 
     void readFromPort();
 
+
+    void clockTimerFctn();
+
+
 private:
     QSerialPort *device;
     Ui::MainWindow *ui;
+    QTimer *clockTimer;
+
     void addToLogs(QString message);
     void initConnectionInformation();
     void displayConnectionInformation();
@@ -51,6 +61,8 @@ private:
     void readFromFile();
 
     void setVariablesFromFileLine();
+
+    void setWeatherIcon();
 
     // Connection informations
     QString connectionStatus;
