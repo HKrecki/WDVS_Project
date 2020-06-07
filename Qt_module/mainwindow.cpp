@@ -204,6 +204,24 @@ void MainWindow::setWeatherIcon(int t_insolation, int t_rainfall)
     ui->WeatherIcon_Label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 }
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \brief MainWindow::setDetailWeatherValues
+/// Wyswietlenie szczegolowych informacji o aktualnych warunkach pogodowych
+void MainWindow::setDetailWeatherValues()
+{
+    // Aktualna temperatura
+    int shortFormatTemperature = temperatureStr.toDouble();
+    QString showFormatTemperature;
+    showFormatTemperature.setNum(shortFormatTemperature);
+    ui->DASHBOARD_temperature_label->setText(showFormatTemperature + "°C");
+
+    // Dane szczegolowe
+    ui->DASHBOARD_weatherDetails_label->setText("Humidity:\t" + humidityStr + "%\n"
+                                                + "Pressure:\t" + pressureStr + "mbar\n"
+                                                + "Insolation:\t" + insolationStr + "%");
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// \brief MainWindow::on_SettingsTabConnectPushButton_clicked
 /// Obsługa przycisku połącz - Nawiązanie połączenia z urządzeniem
@@ -322,7 +340,8 @@ void MainWindow::readFromPort()
         // Ustawienie odpowiedniej wizualizacji pogody
         setWeatherIcon(currentInsolation, currentRainfall);
 
-        // Ustawienie aktualnych wartosci warunkow pogodowych
+        // Ustawienie aktualnych wartosci szczegolowych warunkow pogodowych
+        setDetailWeatherValues();
     }
 }
 

@@ -63,6 +63,7 @@ private:
     void setVariablesFromFileLine();
 
     void setWeatherIcon(int t_insolation, int t_rainfall);
+    void setDetailWeatherValues();
 
     // Connection informations
     QString connectionStatus;
