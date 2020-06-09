@@ -76,10 +76,15 @@ void MainWindow::updateCharts(unsigned long long t_time)
         this->insolationTimelineAxis->setRange(0.0, endLimit);
     }
 
+    if(pressureTimelineAxis->max() != endLimit){
+        this->pressureTimelineAxis->setRange(0.0, endLimit);
+    }
+
 
     this->temperatureChartSeries->append(currentTime, this->currentTemperature);
     this->humidityChartSeries->append(currentTime, this->currentHumidity);
     this->insolationChartSeries->append(currentTime, this->currentInsolation);
+    this->pressureChartSeries->append(currentTime, this->currentPressure);
 }
 
 
@@ -424,6 +429,7 @@ void MainWindow::resizeEvent(QResizeEvent* event){
     this->temperatureChartView->resize(this->temperatureChartView->parentWidget()->size());
     this->humidityChartView->resize(this->humidityChartView->parentWidget()->size());
     this->insolationChartView->resize(this->insolationChartView->parentWidget()->size());
+    this->pressureChartView->resize(this->pressureChartView->parentWidget()->size());
 }
 
 
