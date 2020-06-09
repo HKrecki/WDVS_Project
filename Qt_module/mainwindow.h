@@ -111,22 +111,32 @@ private:
     // Wyswietlenie
     QChartView* temperatureChartView;
     QChartView* humidityChartView;
+    QChartView* pressureChartView;
+    QChartView* insolationChartView;
 
     // Serie
     QLineSeries* temperatureChartSeries;
     QLineSeries* humidityChartSeries;
+    QLineSeries* pressureChartSeries;
+    QLineSeries* insolationChartSeries;
 
     // Osie czasu
     QValueAxis* temperatureTimelineAxis;
     QValueAxis* humidityTimelineAxis;
+    QValueAxis* pressureTimelineAxis;
+    QValueAxis* insolationTimelineAxis;
 
     // Osie wartosci
     QValueAxis* temperatureValueAxis;
     QValueAxis* humidityValueAxis;
+    QValueAxis* pressureValueAxis;
+    QValueAxis* insolationValueAxis;
 
     // Wykresy
     QChart* temperatureChart;
     QChart* humidityChart;
+    QChart* pressureChart;
+    QChart* insolationChart;
 
     void resizeEvent(QResizeEvent* event);
 
