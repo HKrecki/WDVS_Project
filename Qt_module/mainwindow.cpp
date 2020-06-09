@@ -67,7 +67,13 @@ void MainWindow::updateCharts(unsigned long long t_time)
         this->temperatureTimelineAxis->setRange(0.0, endLimit);
     }
 
+    if(humidityTimelineAxis->max() != endLimit){
+        this->humidityTimelineAxis->setRange(0.0, endLimit);
+    }
+
+
     this->temperatureChartSeries->append(currentTime, this->currentTemperature);
+    this->humidityChartSeries->append(currentTime, this->currentHumidity);
 }
 
 
@@ -410,6 +416,8 @@ void MainWindow::resizeEvent(QResizeEvent* event){
     QMainWindow::resizeEvent(event);
 
     this->temperatureChartView->resize(this->temperatureChartView->parentWidget()->size());
+    this->humidityChartView->resize(this->humidityChartView->parentWidget()->size());
 }
+
 
 

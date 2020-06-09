@@ -394,7 +394,7 @@ border: 5px solid black </string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_7">
         <item row="0" column="1">
-         <widget class="QFrame" name="frame_10">
+         <widget class="QFrame" name="humidityChart_frame">
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
           </property>
