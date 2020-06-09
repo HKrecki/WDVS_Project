@@ -18,6 +18,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    this->chartTime.start(); // Rozpoczeniecie odliczania czasu dla wykresow
+
     createCharts();
 
 
@@ -38,6 +40,34 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \brief MainWindow::updateCharts
+/// \param t_temperature
+/// \param t_humidity
+/// \param t_pressure
+/// \param t_insolation
+/// \param t_time
+/// Aktualizacja i dodanie wartosci do wykresow, zmiana zakresu osi czasu
+
+void MainWindow::updateCharts(unsigned long long t_time)
+{
+    long double currentTime = ((long double)t_time)/1000;
+    long double endLimit = 0.0;
+    long double memory;
+
+    while(endLimit < currentTime){
+        memory=endLimit;
+        endLimit += 50;
+    }
+
+    if(temperatureTimelineAxis->max() != endLimit){
+
+        this->temperatureTimelineAxis->setRange(0.0, endLimit);
+    }
+
+    this->temperatureChartSeries->append(currentTime, this->currentTemperature);
 }
 
 
@@ -304,7 +334,8 @@ void MainWindow::readFromPort()
     // Zmienna przechowujaca aktualna date
     QString currentDateTime;
 
-    // Otwarcie pliku i przygotowanie do zapisu danych
+    // Czas potrzebny do wykresow
+    unsigned long long elapsedTime;
 
 
     // TODO: Dodac czyszczenie pliku data.txt
@@ -318,6 +349,8 @@ void MainWindow::readFromPort()
 
     // Odczyt danych z urzadzenia
     while(this->device->canReadLine()){
+
+        elapsedTime = (unsigned long long) this->chartTime.elapsed();
 
         currentDateTime = QDateTime::currentDateTime().toString("yyyy.mm.dd hh:mm:ss");
         QString line = this->device->readLine();
@@ -341,6 +374,9 @@ void MainWindow::readFromPort()
 
         // Ustawienie aktualnych wartosci szczegolowych warunkow pogodowych
         setDetailWeatherValues();
+
+        // Aktualizacja danych na wykresie
+        this->updateCharts(elapsedTime);
     }
 }
 
@@ -369,7 +405,6 @@ void MainWindow::clockTimerFctn()
 /// \brief MainWindow::resizeEvent
 /// \param event
 /// Zmiana wielkosci wykresu w zaleznosci od zmiany rozmiaru okna(rodzica)
-
 void MainWindow::resizeEvent(QResizeEvent* event){
 
     QMainWindow::resizeEvent(event);

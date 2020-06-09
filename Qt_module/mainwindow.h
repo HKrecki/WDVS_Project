@@ -36,6 +36,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void updateCharts(unsigned long long t_time);
+
 private slots:
     void on_tabWidget_currentChanged(int index);
 
@@ -59,6 +61,7 @@ private:
     QSerialPort *device;
     Ui::MainWindow *ui;
     QTimer *clockTimer;
+    QTime chartTime;
 
     void addToLogs(QString message);
     void initConnectionInformation();
@@ -107,18 +110,24 @@ private:
 
     // Wyswietlenie
     QChartView* temperatureChartView;
+    QChartView* humidityChartView;
 
     // Serie
     QLineSeries* temperatureChartSeries;
+    QLineSeries* humidityChartSeries;
 
     // Osie czasu
     QValueAxis* temperatureTimelineAxis;
+    QValueAxis* humidityTimelineAxis;
 
     // Osie wartosci
     QValueAxis* temperatureValueAxis;
+    QValueAxis* humidityValueAxis;
 
     // Wykresy
     QChart* temperatureChart;
+    QChart* humidityChart;
+
     void resizeEvent(QResizeEvent* event);
 
 
