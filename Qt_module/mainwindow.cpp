@@ -18,15 +18,16 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    createCharts();
+
 
     // Inicjalizacja danych po polaczeniu
     initConnectionInformation();
     displayConnectionInformation();
 
 
+    // Przykladowy wykres
     this->device = new QSerialPort(this);
-
-
 
     // Obsulga zegara
     clockTimer = new QTimer(this);
@@ -45,8 +46,6 @@ void MainWindow::on_tabWidget_currentChanged(int index)
 {
 
 }
-
-
 
 
 void MainWindow::on_SettingsTabSearchPushButton_clicked()
@@ -366,7 +365,16 @@ void MainWindow::clockTimerFctn()
     ui->DASHBOARD_date_label->setText(englishDate);
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \brief MainWindow::resizeEvent
+/// \param event
+/// Zmiana wielkosci wykresu w zaleznosci od zmiany rozmiaru okna(rodzica)
 
+void MainWindow::resizeEvent(QResizeEvent* event){
 
+    QMainWindow::resizeEvent(event);
+
+    this->temperatureChartView->resize(this->temperatureChartView->parentWidget()->size());
+}
 
 

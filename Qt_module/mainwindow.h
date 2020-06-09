@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "ui_mainwindow.h"
+
 #include <QMainWindow>
 #include <QDebug>
 #include <QList>
@@ -16,6 +18,11 @@
 
 // Obsluga zegara
 #include <QTimer>
+
+// Obsluga wykresow
+#include <QtCharts>
+#include <QChartView>
+#include <QLineSeries>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -95,5 +102,35 @@ private:
     double currentPressure = 0.0;
     double currentRainfall = 0.0;
     double currentInsolation = 0.0;
+
+    // WYKRESY
+
+    // Wyswietlenie
+    QChartView* temperatureChartView;
+
+    // Serie
+    QLineSeries* temperatureChartSeries;
+
+    // Osie czasu
+    QValueAxis* temperatureTimelineAxis;
+
+    // Osie wartosci
+    QValueAxis* temperatureValueAxis;
+
+    // Wykresy
+    QChart* temperatureChart;
+    void resizeEvent(QResizeEvent* event);
+
+
+    // WYKRESY - FUNKCJE //
+    void createCharts();
+
+    void createSeries();
+    void createAxes();
+    void makeChart();
+    void attachSeries();
+    void showChart();
+
+
 };
 #endif // MAINWINDOW_H
