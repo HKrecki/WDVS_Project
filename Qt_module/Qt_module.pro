@@ -20,7 +20,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     charts.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    weatherHistory.cpp
 
 HEADERS += \
     mainwindow.h

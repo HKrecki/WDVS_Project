@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <settingstab.h>
+// #include <settingstab.h>
 
 #include <QDebug>
 #include <QList>
@@ -18,8 +18,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    this->chartTime.start(); // Rozpoczeniecie odliczania czasu dla wykresow
+    initWeatherHistory();
 
+    this->chartTime.start(); // Rozpoczeniecie odliczania czasu dla wykresow
     createCharts();
 
 
@@ -35,6 +36,26 @@ MainWindow::MainWindow(QWidget *parent)
     clockTimer = new QTimer(this);
     connect(clockTimer, SIGNAL(timeout()), this, SLOT(clockTimerFctn()));
     clockTimer->start(1000);
+
+    // Tymczasowe ustawienie ikon pogody
+    QPixmap yesterdayPix(":/resources/img/cloudy.png");
+    QPixmap twoDaysAgoPix(":/resources/img/sunny.png");
+    QPixmap threeDaysAgoPix(":/resources/img/rain.png");
+    QPixmap fourDaysAgoPix(":/resources/img/sunny.png");
+
+    int w = ui->yesterdayWeatherIcon_label->width();
+    int h = ui->yesterdayWeatherIcon_label->height();
+    ui->yesterdayWeatherIcon_label->setPixmap(yesterdayPix.scaled(w, h, Qt::KeepAspectRatio));
+    ui->yesterdayWeatherIcon_label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+
+    ui->twoDaysAgoWeatherIcon_label->setPixmap(twoDaysAgoPix.scaled(w, h, Qt::KeepAspectRatio));
+    ui->twoDaysAgoWeatherIcon_label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+
+    ui->threeDaysAgoWeatherIcon_label->setPixmap(threeDaysAgoPix.scaled(w, h, Qt::KeepAspectRatio));
+    ui->threeDaysAgoWeatherIcon_label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+
+    ui->fourDaysAgoWeatherIcon_label->setPixmap(fourDaysAgoPix.scaled(w, h, Qt::KeepAspectRatio));
+    ui->fourDaysAgoWeatherIcon_label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 }
 
 MainWindow::~MainWindow()
@@ -113,7 +134,7 @@ void MainWindow::on_SettingsTabSearchPushButton_clicked()
 
 void MainWindow::addToLogs(QString message)
 {
-    QString currentDateTime = QDateTime::currentDateTime().toString("yyyy.mm.dd hh:mm:ss");
+    QString currentDateTime = QDateTime::currentDateTime().toString("yyyy.MM.dd hh:mm:ss");
     ui->Logs_TextEdit->append(currentDateTime + "\t\t" + message);
 }
 
@@ -264,7 +285,7 @@ void MainWindow::setDetailWeatherValues()
 
     // Dane szczegolowe
     ui->DASHBOARD_weatherDetails_label->setText("Humidity:\t" + humidityStr + "%\n"
-                                                + "Pressure:\t" + pressureStr + "mbar\n"
+                                                + "Pressure:\t" + pressureStr + " hPa\n"
                                                 + "Insolation:\t" + insolationStr + "%");
 }
 
@@ -369,7 +390,7 @@ void MainWindow::readFromPort()
 
         elapsedTime = (unsigned long long) this->chartTime.elapsed();
 
-        currentDateTime = QDateTime::currentDateTime().toString("yyyy.mm.dd hh:mm:ss");
+        currentDateTime = QDateTime::currentDateTime().toString("yyyy.MM.dd hh:mm:ss");
         QString line = this->device->readLine();
 
         QString separator = "\r";
@@ -431,6 +452,5 @@ void MainWindow::resizeEvent(QResizeEvent* event){
     this->insolationChartView->resize(this->insolationChartView->parentWidget()->size());
     this->pressureChartView->resize(this->pressureChartView->parentWidget()->size());
 }
-
 
 

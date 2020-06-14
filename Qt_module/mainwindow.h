@@ -24,6 +24,9 @@
 #include <QChartView>
 #include <QLineSeries>
 
+// Obsluga historii pogody
+#include <QVector>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -149,6 +152,8 @@ private:
     void makeChart();
     void attachSeries();
     void showChart();
+
+    void initWeatherHistory();
 
 
 };

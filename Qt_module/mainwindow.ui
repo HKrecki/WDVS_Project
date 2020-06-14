@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1060</width>
-    <height>540</height>
+    <height>585</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,7 +32,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="DashboardTab">
        <property name="autoFillBackground">
@@ -263,8 +263,14 @@ border: 5px solid black </string>
            <enum>QFrame::Raised</enum>
           </property>
           <layout class="QGridLayout" name="gridLayout_12">
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_7">
+           <item row="1" column="0">
+            <widget class="QLabel" name="yesterdayWeatherIcon_label">
+             <property name="minimumSize">
+              <size>
+               <width>200</width>
+               <height>120</height>
+              </size>
+             </property>
              <property name="font">
               <font>
                <pointsize>30</pointsize>
@@ -274,41 +280,49 @@ border: 5px solid black </string>
               <string notr="true">border: 0px solid black </string>
              </property>
              <property name="text">
-              <string>No data</string>
+              <string>TextLabel</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
             </widget>
            </item>
-          </layout>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QFrame" name="frame_6">
-          <property name="styleSheet">
-           <string notr="true">border-color: rgb(0, 0, 0);
-border: 5px solid black </string>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_13">
            <item row="0" column="0">
-            <widget class="QLabel" name="label_8">
+            <widget class="QLabel" name="label_7">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>25</height>
+              </size>
+             </property>
              <property name="font">
               <font>
-               <pointsize>30</pointsize>
+               <pointsize>15</pointsize>
               </font>
              </property>
              <property name="styleSheet">
               <string notr="true">border: 0px solid black </string>
              </property>
              <property name="text">
-              <string>No data</string>
+              <string>June 8</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_2">
+             <property name="font">
+              <font>
+               <pointsize>15</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border: 0px solid black </string>
+             </property>
+             <property name="text">
+              <string>23 °C</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -333,6 +347,36 @@ border: 5px solid black </string>
           <layout class="QGridLayout" name="gridLayout_14">
            <item row="0" column="0">
             <widget class="QLabel" name="label_9">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>15</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border: 0px solid black </string>
+             </property>
+             <property name="text">
+              <string>June 6</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="threeDaysAgoWeatherIcon_label">
+             <property name="minimumSize">
+              <size>
+               <width>200</width>
+               <height>120</height>
+              </size>
+             </property>
              <property name="font">
               <font>
                <pointsize>30</pointsize>
@@ -342,7 +386,25 @@ border: 5px solid black </string>
               <string notr="true">border: 0px solid black </string>
              </property>
              <property name="text">
-              <string>No data</string>
+              <string>TextLabel</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_4">
+             <property name="font">
+              <font>
+               <pointsize>15</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border: 0px solid black </string>
+             </property>
+             <property name="text">
+              <string>25 °C</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -367,6 +429,36 @@ border: 5px solid black </string>
           <layout class="QGridLayout" name="gridLayout_15">
            <item row="0" column="0">
             <widget class="QLabel" name="label_10">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>15</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border: 0px solid black </string>
+             </property>
+             <property name="text">
+              <string>June 5</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="fourDaysAgoWeatherIcon_label">
+             <property name="minimumSize">
+              <size>
+               <width>200</width>
+               <height>120</height>
+              </size>
+             </property>
              <property name="font">
               <font>
                <pointsize>30</pointsize>
@@ -376,7 +468,107 @@ border: 5px solid black </string>
               <string notr="true">border: 0px solid black </string>
              </property>
              <property name="text">
-              <string>No data</string>
+              <string>TextLabel</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_5">
+             <property name="font">
+              <font>
+               <pointsize>15</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border: 0px solid black </string>
+             </property>
+             <property name="text">
+              <string>21 °C</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QFrame" name="frame_6">
+          <property name="styleSheet">
+           <string notr="true">border-color: rgb(0, 0, 0);
+border: 5px solid black </string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_13">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_8">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>15</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border: 0px solid black </string>
+             </property>
+             <property name="text">
+              <string>June 7</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="twoDaysAgoWeatherIcon_label">
+             <property name="minimumSize">
+              <size>
+               <width>200</width>
+               <height>120</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>30</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border: 0px solid black </string>
+             </property>
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_3">
+             <property name="font">
+              <font>
+               <pointsize>15</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border: 0px solid black </string>
+             </property>
+             <property name="text">
+              <string>19 °C</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
