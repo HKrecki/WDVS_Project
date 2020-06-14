@@ -21,10 +21,12 @@ SOURCES += \
     charts.cpp \
     main.cpp \
     mainwindow.cpp \
-    weatherHistory.cpp
+    weatherHistory.cpp \
+    weatherdatahistory.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    weatherdatahistory.h
 
 FORMS += \
     mainwindow.ui

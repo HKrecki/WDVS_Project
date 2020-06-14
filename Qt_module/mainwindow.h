@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "ui_mainwindow.h"
+#include "weatherdatahistory.h"
 
 #include <QMainWindow>
 #include <QDebug>

@@ -18,7 +18,22 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    initWeatherHistory();
+
+    // Historia warunkow pogodowych //
+
+    // Wyswietlenie danych, zebranych w dniach poprzednich //
+    weatherDataHistory pastWeatherData;
+
+    // Sczytanie danych z pliku do pamieci
+    pastWeatherData.initWeatherHistory();
+
+    // Usrednienie wynikow z dni poprzednich
+    pastWeatherData.calculateAverageDayWeatherData();
+
+
+
+
+
 
     this->chartTime.start(); // Rozpoczeniecie odliczania czasu dla wykresow
     createCharts();
