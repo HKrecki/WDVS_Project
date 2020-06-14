@@ -34,6 +34,16 @@ public:
     double getThreeDaysAgoTemperature() const {return threeDaysAgoAverageTemperature;};
     double getFourDaysAgoTemperature() const {return fourDaysAgoAverageTemperature;};
 
+    double getYesterdayRainfall() const {return yesterdayAverageRainfall;};
+    double getTwoDaysAgoRainfall() const {return twoDaysAgoAverageRainfall;};
+    double getThreeDaysAgoRainfall() const {return threeDaysAgoAverageRainfall;};
+    double getFourDaysAgoRainfall() const {return fourDaysAgoAverageRainfall;};
+
+    double getYesterdayInsolation() const {return yesterdayAverageInsolation;};
+    double getTwoDaysAgoInsolation() const {return twoDaysAgoAverageInsolation;};
+    double getThreeDaysAgoInsolation() const {return threeDaysAgoAverageInsolation;};
+    double getFourDaysAgoInsolation() const {return fourDaysAgoAverageInsolation;};
+
 private:
     struct oneWeatherData{
         float temperature;

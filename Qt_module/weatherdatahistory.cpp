@@ -172,17 +172,7 @@ void weatherDataHistory::calculateAverageDayWeatherData()
 
 char weatherDataHistory::selectWeatherIcon(int t_daysAgoNumber) const
 {
-    /*
-    if(t_insolation > 50 && t_rainfall < 10){
-        return 's';
-    }
-    else if(t_insolation <= 50 && t_rainfall < 10){
-        return 'c';
-    }
-    else if(t_rainfall >= 10){
-        return 'r';
-    }
-    */
+
 }
 
 

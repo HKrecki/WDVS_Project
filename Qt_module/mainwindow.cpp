@@ -33,6 +33,10 @@ MainWindow::MainWindow(QWidget *parent)
     // Wyswietlenie temperatury z dni poprzednich
     showPastTemperature(pastWeatherData);
 
+    // Wyswietlenie ikon pogody z dni poprzednich
+    showPastIcons(pastWeatherData);
+
+
 
 
 
@@ -54,26 +58,6 @@ MainWindow::MainWindow(QWidget *parent)
     clockTimer = new QTimer(this);
     connect(clockTimer, SIGNAL(timeout()), this, SLOT(clockTimerFctn()));
     clockTimer->start(1000);
-
-    // Tymczasowe ustawienie ikon pogody
-    QPixmap yesterdayPix(":/resources/img/cloudy.png");
-    QPixmap twoDaysAgoPix(":/resources/img/sunny.png");
-    QPixmap threeDaysAgoPix(":/resources/img/rain.png");
-    QPixmap fourDaysAgoPix(":/resources/img/sunny.png");
-
-    int w = ui->yesterdayWeatherIcon_label->width();
-    int h = ui->yesterdayWeatherIcon_label->height();
-    ui->yesterdayWeatherIcon_label->setPixmap(yesterdayPix.scaled(w, h, Qt::KeepAspectRatio));
-    ui->yesterdayWeatherIcon_label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-
-    ui->twoDaysAgoWeatherIcon_label->setPixmap(twoDaysAgoPix.scaled(w, h, Qt::KeepAspectRatio));
-    ui->twoDaysAgoWeatherIcon_label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-
-    ui->threeDaysAgoWeatherIcon_label->setPixmap(threeDaysAgoPix.scaled(w, h, Qt::KeepAspectRatio));
-    ui->threeDaysAgoWeatherIcon_label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-
-    ui->fourDaysAgoWeatherIcon_label->setPixmap(fourDaysAgoPix.scaled(w, h, Qt::KeepAspectRatio));
-    ui->fourDaysAgoWeatherIcon_label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 }
 
 MainWindow::~MainWindow()
@@ -316,13 +300,80 @@ void MainWindow::showPastTemperature(weatherDataHistory t_pastData)
     int threeDaysAgoTemperature = t_pastData.getThreeDaysAgoTemperature();
     int fourDaysAgoTempertaure = t_pastData.getFourDaysAgoTemperature();
 
-    // Dodac konwersje na QString i wyswietlic
+    // Konwersja i wyswietlenie
     ui->yesterdayTemperature_label->setText(QString::number(yesterdayTemperatureInt) + "°C");
     ui->twoDaysAgoTemperature_label->setText(QString::number(twoDaysAgoTemperatureInt) + "°C");
     ui->threeDaysAgoTemeperature_label->setText(QString::number(threeDaysAgoTemperature)+ "°C");
     ui->fourDaysAgoTemperature_label->setText(QString::number(fourDaysAgoTempertaure) + "°C");
 
     qDebug() << twoDaysAgoTemperatureInt;
+}
+
+
+
+
+void MainWindow::showPastIcons(weatherDataHistory t_pastData)
+{
+    int _currentRainfall = 0;
+    int _currentInsolation = 0;
+
+    // Zmienne do ustawienia rozmiaru ikony
+    int _w = ui->Day1ago_label->width();
+    int _h = ui->Day1ago_label->height();
+
+    QPixmap pix;
+    pix.load(":/resources/img/sunny.png");
+
+    for(int i =0; i<4; i++){
+        switch(i){
+            case 0:
+                currentRainfall = t_pastData.getYesterdayRainfall();
+                currentInsolation = t_pastData.getYesterdayInsolation();
+                break;
+            case 1:
+                currentRainfall = t_pastData.getTwoDaysAgoRainfall();
+                currentRainfall = t_pastData.getTwoDaysAgoInsolation();
+                break;
+            case 2:
+                currentRainfall = t_pastData.getThreeDaysAgoRainfall();
+                currentRainfall = t_pastData.getThreeDaysAgoInsolation();
+                break;
+            case 3:
+                currentRainfall = t_pastData.getFourDaysAgoRainfall();
+                currentRainfall = t_pastData.getFourDaysAgoInsolation();
+                break;
+        }
+
+
+        if(_currentInsolation > 50 && _currentRainfall < 10){
+            pix.load(":/resources/img/sunny.png");
+        }
+        else if(_currentInsolation <= 50 && _currentRainfall < 10){
+            pix.load(":/resources/img/cloudy.png");
+        }
+        else if(_currentRainfall >= 10){
+            pix.load(":/resources/img/rain.png");
+        }
+
+        switch(i){
+            case 0:
+                ui->Day1ago_label->setPixmap(pix.scaled(_w, _h, Qt::KeepAspectRatio));
+                ui->Day1ago_label->setPixmap(pix.scaled(_w, _h, Qt::KeepAspectRatio));
+                break;
+            case 1:
+                ui->Day2ago_label->setPixmap(pix.scaled(_w, _h, Qt::KeepAspectRatio));
+                ui->Day2ago_label->setPixmap(pix.scaled(_w, _h, Qt::KeepAspectRatio));
+                break;
+            case 2:
+                ui->Day3ago_label->setPixmap(pix.scaled(_w, _h, Qt::KeepAspectRatio));
+                ui->Day3ago_label->setPixmap(pix.scaled(_w, _h, Qt::KeepAspectRatio));
+                break;
+            case 3:
+                ui->Day4ago_label->setPixmap(pix.scaled(_w, _h, Qt::KeepAspectRatio));
+                ui->Day4ago_label->setPixmap(pix.scaled(_w, _h, Qt::KeepAspectRatio));
+                break;
+        }
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////

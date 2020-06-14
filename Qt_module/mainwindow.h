@@ -81,6 +81,7 @@ private:
     void setDetailWeatherValues();
 
     void showPastTemperature(weatherDataHistory t_pastData);
+    void showPastIcons(weatherDataHistory t_pastData);
 
     // Connection informations
     QString connectionStatus;
