@@ -27,6 +27,12 @@ public:
      */
     void calculateAverageDayWeatherData();
 
+    char selectWeatherIcon(int t_daysAgoNumber) const;
+
+    double getYesterdayTemperature() const {return yesterdayAverageTemperature;};
+    double getTwoDaysAgoTemperature() const {return twoDaysAgoAverageTemperature;};
+    double getThreeDaysAgoTemperature() const {return threeDaysAgoAverageTemperature;};
+    double getFourDaysAgoTemperature() const {return fourDaysAgoAverageTemperature;};
 
 private:
     struct oneWeatherData{

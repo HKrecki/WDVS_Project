@@ -312,7 +312,7 @@ border: 5px solid black </string>
             </widget>
            </item>
            <item row="2" column="0">
-            <widget class="QLabel" name="label_2">
+            <widget class="QLabel" name="yesterdayTemperature_label">
              <property name="font">
               <font>
                <pointsize>15</pointsize>
@@ -322,7 +322,7 @@ border: 5px solid black </string>
               <string notr="true">border: 0px solid black </string>
              </property>
              <property name="text">
-              <string>23 °C</string>
+              <string/>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -394,7 +394,7 @@ border: 5px solid black </string>
             </widget>
            </item>
            <item row="2" column="0">
-            <widget class="QLabel" name="label_4">
+            <widget class="QLabel" name="threeDaysAgoTemeperature_label">
              <property name="font">
               <font>
                <pointsize>15</pointsize>
@@ -476,7 +476,7 @@ border: 5px solid black </string>
             </widget>
            </item>
            <item row="2" column="0">
-            <widget class="QLabel" name="label_5">
+            <widget class="QLabel" name="fourDaysAgoTemperature_label">
              <property name="font">
               <font>
                <pointsize>15</pointsize>
@@ -558,7 +558,7 @@ border: 5px solid black </string>
             </widget>
            </item>
            <item row="2" column="0">
-            <widget class="QLabel" name="label_3">
+            <widget class="QLabel" name="twoDaysAgoTemperature_label">
              <property name="font">
               <font>
                <pointsize>15</pointsize>

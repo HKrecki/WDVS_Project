@@ -80,6 +80,8 @@ private:
     void setWeatherIcon(int t_insolation, int t_rainfall);
     void setDetailWeatherValues();
 
+    void showPastTemperature(weatherDataHistory t_pastData);
+
     // Connection informations
     QString connectionStatus;
     QString baudrate;

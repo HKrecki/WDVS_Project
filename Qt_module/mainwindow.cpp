@@ -30,6 +30,9 @@ MainWindow::MainWindow(QWidget *parent)
     // Usrednienie wynikow z dni poprzednich
     pastWeatherData.calculateAverageDayWeatherData();
 
+    // Wyswietlenie temperatury z dni poprzednich
+    showPastTemperature(pastWeatherData);
+
 
 
 
@@ -302,6 +305,24 @@ void MainWindow::setDetailWeatherValues()
     ui->DASHBOARD_weatherDetails_label->setText("Humidity:\t" + humidityStr + "%\n"
                                                 + "Pressure:\t" + pressureStr + " hPa\n"
                                                 + "Insolation:\t" + insolationStr + "%");
+}
+
+
+
+void MainWindow::showPastTemperature(weatherDataHistory t_pastData)
+{
+    int yesterdayTemperatureInt = t_pastData.getYesterdayTemperature();
+    int twoDaysAgoTemperatureInt = t_pastData.getTwoDaysAgoTemperature();
+    int threeDaysAgoTemperature = t_pastData.getThreeDaysAgoTemperature();
+    int fourDaysAgoTempertaure = t_pastData.getFourDaysAgoTemperature();
+
+    // Dodac konwersje na QString i wyswietlic
+    ui->yesterdayTemperature_label->setText(QString::number(yesterdayTemperatureInt) + "°C");
+    ui->twoDaysAgoTemperature_label->setText(QString::number(twoDaysAgoTemperatureInt) + "°C");
+    ui->threeDaysAgoTemeperature_label->setText(QString::number(threeDaysAgoTemperature)+ "°C");
+    ui->fourDaysAgoTemperature_label->setText(QString::number(fourDaysAgoTempertaure) + "°C");
+
+    qDebug() << twoDaysAgoTemperatureInt;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
