@@ -66,6 +66,7 @@ private:
     QTimer *clockTimer;
     QTime chartTime;
 
+
     void addToLogs(QString message);
     void initConnectionInformation();
     void displayConnectionInformation();

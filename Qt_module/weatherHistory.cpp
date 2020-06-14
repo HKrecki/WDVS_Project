@@ -26,6 +26,7 @@ void MainWindow::initWeatherHistory()
     // Podział aktualnej daty na rok, miesiac i dzien -> toInt();
     QStringList fullCurrentDate;
     int yearCur, monthCur, dayCur;
+
     fullCurrentDate = currentDate.split(".");
     yearCur = fullCurrentDate.at(0).toInt();
     monthCur = fullCurrentDate.at(1).toInt();
@@ -42,12 +43,12 @@ void MainWindow::initWeatherHistory()
     QString currentEntireFileLine;
 
     // Dane wczytane z linii
-    QString currentLineDay;
-    QString currentLineMonth;
-    QString currentLineYear;
-    QString currentLineTemperature;
-    QString currentLineInsolation;
-    QString currentLineRainfall;
+    int currentLineDay;
+    int currentLineMonth;
+    int currentLineYear;
+    int currentLineTemperature;
+    int currentLineInsolation;
+    int currentLineRainfall;
 
     QStringList allData;
     QStringList allDateData;
@@ -68,19 +69,43 @@ void MainWindow::initWeatherHistory()
 
         // Przypisanie daty do zmiennych: dzien, miesiac, rok
         allDateData = currentLineDate.split(".");
-        currentLineYear = allDateData.at(0);
-        currentLineMonth = allDateData.at(1);
-        currentLineDay = allDateData.at(2);
+        currentLineYear = allDateData.at(0).toInt();
+        currentLineMonth = allDateData.at(1).toInt();
+        currentLineDay = allDateData.at(2).toInt();
 
         // Przypisanie warunkow pogodowych do zmiennych:
         allWeatherData = currentLineWeatherData.split("_");
-        currentLineTemperature = allWeatherData.at(2);
-        currentLineRainfall = allWeatherData.at(5);
-        currentLineInsolation = allWeatherData.at(6);
+        currentLineTemperature = allWeatherData.at(2).toInt();
+        currentLineRainfall = allWeatherData.at(5).toInt();
+        currentLineInsolation = allWeatherData.at(6).toInt();
 
         qDebug() << "Data: " << currentLineYear << "." << currentLineMonth << "." << currentLineDay;
         qDebug() << "Warunki" << currentLineTemperature << ", " << currentLineMonth
                  << ", " << currentLineDay;
+
+        // Utworzenie obiektu, przechowujacego pobrane z linii dane pogodowe
+        oneWeatherData oneSignalWeatherData;
+        oneSignalWeatherData.temperature = currentLineTemperature;
+        oneSignalWeatherData.insolation = currentLineInsolation;
+        oneSignalWeatherData.rainfall = currentLineRainfall;
+
+        // Jesli rok i miesiac sczytanej daty sie zgadza
+        if(currentLineYear == yearCur && currentLineMonth == monthCur){
+            // Jesli wczoraj
+            if(currentLineDay == (dayCur-1)){
+                // Dodanie do wektora wczorajszego, danych ze sczytanej linii
+                yesterdayDataVec.push_back(oneSignalWeatherData);
+            }
+            else if(currentLineDay == ( dayCur - 2 )){
+                twoDaysAgoDataVec.push_back(oneSignalWeatherData);
+            }
+            else if(currentLineDay == (dayCur-3)){
+                threeDaysAgoDataVec.push_back(oneSignalWeatherData);
+            }
+            else if(currentLineDay == (dayCur-4)){
+                fourDaysAgoDataVec.push_back(oneSignalWeatherData);
+            }
+        }
     }
 
 
