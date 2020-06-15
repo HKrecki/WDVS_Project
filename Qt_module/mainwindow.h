@@ -80,6 +80,7 @@ private:
     void setWeatherIcon(int t_insolation, int t_rainfall);
     void setDetailWeatherValues();
 
+    void showPastDates();
     void showPastTemperature(weatherDataHistory t_pastData);
     void showPastIcons(weatherDataHistory t_pastData);
 

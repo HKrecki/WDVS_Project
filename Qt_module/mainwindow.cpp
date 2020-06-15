@@ -24,6 +24,9 @@ MainWindow::MainWindow(QWidget *parent)
     // Wyswietlenie danych, zebranych w dniach poprzednich //
     weatherDataHistory pastWeatherData;
 
+    // Ustawienie dat z dni poprzednich
+    showPastDates();
+
     // Sczytanie danych z pliku do pamieci
     pastWeatherData.initWeatherHistory();
 
@@ -289,6 +292,35 @@ void MainWindow::setDetailWeatherValues()
     ui->DASHBOARD_weatherDetails_label->setText("Humidity:\t" + humidityStr + "%\n"
                                                 + "Pressure:\t" + pressureStr + " hPa\n"
                                                 + "Insolation:\t" + insolationStr + "%");
+}
+
+void MainWindow::showPastDates()
+{
+    QLocale curLocale(QLocale("en_US"));
+    QLocale::setDefault(curLocale);
+
+    QDate date = QDate::currentDate();
+    QString englishDate = QLocale().toString(date);
+
+    QStringList devideDate = englishDate.split(", ");
+    QStringList MonthAndDay = devideDate.at(1).split(" ");
+
+    int todayDay = MonthAndDay.at(1).toInt();
+    QString oneDayAgo = QString::number(todayDay - 1);
+    QString twoDaysAgo = QString::number(todayDay - 2);
+    QString threeDaysAgo = QString::number(todayDay - 3);
+    QString fourDaysAgo = QString::number(todayDay - 4);
+
+    // Set short dates
+    QString oneDayAgoShortDate = MonthAndDay.at(0) + " " + oneDayAgo;
+    QString twoDaysAgoShortDate = MonthAndDay.at(0) + " " + twoDaysAgo;
+    QString threeDaysAgoShortDate = MonthAndDay.at(0) + " " + threeDaysAgo;
+    QString fourDaysAgoShortDate = MonthAndDay.at(0) + " " + fourDaysAgo;
+
+    ui->oneDayAgoDate_label->setText(oneDayAgoShortDate);
+    ui->twoDaysAgoDate_label->setText(twoDaysAgoShortDate);
+    ui->threeDaysAgoDate_label->setText(threeDaysAgoShortDate);
+    ui->fourDaysAgoDate_label->setText(fourDaysAgoShortDate);
 }
 
 
