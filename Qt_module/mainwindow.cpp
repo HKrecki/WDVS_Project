@@ -80,37 +80,19 @@ MainWindow::~MainWindow()
 void MainWindow::updateCharts(unsigned long long t_time)
 {
     long double currentTime = ((long double)t_time)/1000;
-    long double endLimit = 0.0;
-    long double memory;
 
-    while(endLimit < currentTime){
-        memory=endLimit;
-        endLimit += 50;
-    }
+    // TODO: Odczytac aktualna godzine, przekonwertowac na liczbe i wstawic do wykresu
+    QTime time = QTime::currentTime();
+    QString timeStr = time.toString("hh.mm");
 
-    if(temperatureTimelineAxis->max() != endLimit){
-
-        this->temperatureTimelineAxis->setRange(0.0, endLimit);
-    }
-
-    if(humidityTimelineAxis->max() != endLimit){
-        this->humidityTimelineAxis->setRange(0.0, endLimit);
-    }
+    float hour = timeStr.toFloat();
 
 
-    if(insolationTimelineAxis->max() != endLimit){
-        this->insolationTimelineAxis->setRange(0.0, endLimit);
-    }
-
-    if(pressureTimelineAxis->max() != endLimit){
-        this->pressureTimelineAxis->setRange(0.0, endLimit);
-    }
-
-
-    this->temperatureChartSeries->append(currentTime, this->currentTemperature);
-    this->humidityChartSeries->append(currentTime, this->currentHumidity);
-    this->insolationChartSeries->append(currentTime, this->currentInsolation);
-    this->pressureChartSeries->append(currentTime, this->currentPressure);
+    // Wstawienie nowych punktow do wykresu
+    this->temperatureChartSeries->append(hour, this->currentTemperature);
+    this->humidityChartSeries->append(hour, this->currentHumidity);
+    this->insolationChartSeries->append(hour, this->currentInsolation);
+    this->pressureChartSeries->append(hour, this->currentPressure);
 }
 
 

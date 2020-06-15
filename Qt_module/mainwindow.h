@@ -159,7 +159,7 @@ private:
     void attachSeries();
     void showChart();
 
-    void initWeatherHistory();
+    void initTodayWeatherCharts();
 
 
 };

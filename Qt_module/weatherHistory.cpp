@@ -4,7 +4,9 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// \brief MainWindow::initWeatherHistory
 /// Wyświetlenie pogody z ostatnich 4 dni
-void MainWindow::initWeatherHistory()
+
+
+void MainWindow::initTodayWeatherCharts()
 {
     struct oneWeatherData{
         double temperature;
@@ -14,10 +16,7 @@ void MainWindow::initWeatherHistory()
 
 
     // Wektor zebranych danych z jednego dnia
-    QVector<oneWeatherData> yesterdayDataVec;
-    QVector<oneWeatherData> twoDaysAgoDataVec;
-    QVector<oneWeatherData> threeDaysAgoDataVec;
-    QVector<oneWeatherData> fourDaysAgoDataVec;
+    QVector<oneWeatherData> todayDataVec;
 
     // Odczyt aktualnej daty
     QString currentDate;
@@ -92,35 +91,13 @@ void MainWindow::initWeatherHistory()
         // Jesli rok i miesiac sczytanej daty sie zgadza
         if(currentLineYear == yearCur && currentLineMonth == monthCur){
             // Jesli wczoraj
-            if(currentLineDay == (dayCur-1)){
+            if(currentLineDay == (dayCur)){
                 // Dodanie do wektora wczorajszego, danych ze sczytanej linii
-                yesterdayDataVec.push_back(oneSignalWeatherData);
-            }
-            else if(currentLineDay == ( dayCur - 2 )){
-                twoDaysAgoDataVec.push_back(oneSignalWeatherData);
-            }
-            else if(currentLineDay == (dayCur-3)){
-                threeDaysAgoDataVec.push_back(oneSignalWeatherData);
-            }
-            else if(currentLineDay == (dayCur-4)){
-                fourDaysAgoDataVec.push_back(oneSignalWeatherData);
+                todayDataVec.push_back(oneSignalWeatherData);
             }
         }
     }
 
-
-
-    // Odczytanie daty z danej linii, z pliku data.txt, sprawdzenie czy data pokrywa sie z aktualna,
-    // jesli tak, to pominiecie lini i przejscie do nastepnej, az do momentu, gdy data bedzie z dnia
-    // poprzedniego.
-
-
-
-
-
-
-
-
-
     file.close();
 }
+

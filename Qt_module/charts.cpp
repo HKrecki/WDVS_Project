@@ -31,7 +31,7 @@ void MainWindow::createAxes(){
     // Temperature
     this->temperatureTimelineAxis = new QValueAxis;
     this->temperatureTimelineAxis->setLabelFormat("%.2f");
-    this->temperatureTimelineAxis->setRange(0,10);
+    this->temperatureTimelineAxis->setRange(0,24);
     this->temperatureTimelineAxis->setTickCount(6);
 
     this->temperatureValueAxis = new QValueAxis;
@@ -42,7 +42,7 @@ void MainWindow::createAxes(){
     // Humidity
     this->humidityTimelineAxis = new QValueAxis;
     this->humidityTimelineAxis->setLabelFormat("%.2f");
-    this->humidityTimelineAxis->setRange(0,10);
+    this->humidityTimelineAxis->setRange(0,24);
     this->humidityTimelineAxis->setTickCount(6);
 
     this->humidityValueAxis = new QValueAxis;
@@ -53,7 +53,7 @@ void MainWindow::createAxes(){
     // Insolation
     this->insolationTimelineAxis = new QValueAxis;
     this->insolationTimelineAxis->setLabelFormat("%.1f");
-    this->insolationTimelineAxis->setRange(0,10);
+    this->insolationTimelineAxis->setRange(0,24);
     this->insolationTimelineAxis->setTickCount(6);
 
     this->insolationValueAxis = new QValueAxis;
@@ -64,7 +64,7 @@ void MainWindow::createAxes(){
     // Pressure
     this->pressureTimelineAxis = new QValueAxis;
     this->pressureTimelineAxis->setLabelFormat("%.1f");
-    this->pressureTimelineAxis->setRange(0, 10);
+    this->pressureTimelineAxis->setRange(0, 24);
     this->pressureTimelineAxis->setTickCount(6);
 
     this->pressureValueAxis = new QValueAxis;
