@@ -39,15 +39,12 @@ MainWindow::MainWindow(QWidget *parent)
     // Wyswietlenie ikon pogody z dni poprzednich
     showPastIcons(pastWeatherData);
 
-
-
-
-
-
-
+    // Obsluga wykresow //
     this->chartTime.start(); // Rozpoczeniecie odliczania czasu dla wykresow
     createCharts();
 
+    // Inicjalizacja wykresow, danymi, ktore zostaly odcytane wczesniej, dnia obecnego
+    initTodayWeatherCharts();
 
     // Inicjalizacja danych po polaczeniu
     initConnectionInformation();
@@ -68,6 +65,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::initCharts(){
+    this->temperatureChartSeries->append(0, 0);
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// \brief MainWindow::updateCharts
 /// \param t_temperature
@@ -79,7 +80,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::updateCharts(unsigned long long t_time)
 {
-    long double currentTime = ((long double)t_time)/1000;
+    // long double currentTime = ((long double)t_time)/1000;
 
     // TODO: Odczytac aktualna godzine, przekonwertowac na liczbe i wstawic do wykresu
     QTime time = QTime::currentTime();

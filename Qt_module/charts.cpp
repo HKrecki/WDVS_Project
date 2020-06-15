@@ -15,16 +15,16 @@
 
 void MainWindow::createSeries(){
     this->temperatureChartSeries = new QLineSeries();
-    this->temperatureChartSeries->append(0,0);
+    // this->temperatureChartSeries->append(0,0);
 
     this->humidityChartSeries = new QLineSeries();
-    this->humidityChartSeries->append(0,0);
+    // this->humidityChartSeries->append(0,0);
 
     this->insolationChartSeries = new QLineSeries();
-    this->insolationChartSeries->append(0,0);
+    // this->insolationChartSeries->append(0,0);
 
     this->pressureChartSeries = new QLineSeries();
-    this->pressureChartSeries->append(0,0);
+    // this->pressureChartSeries->append(0,0);
 }
 
 void MainWindow::createAxes(){

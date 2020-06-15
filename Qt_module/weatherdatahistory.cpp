@@ -165,7 +165,7 @@ void weatherDataHistory::calculateAverageDayWeatherData()
         fourDaysAgoAverageInsolation /= fourDaysAgoDataCount;
     }
 
-    qDebug() << fourDaysAgoAverageTemperature;
+    // qDebug() << fourDaysAgoAverageTemperature;
 }
 
 

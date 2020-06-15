@@ -9,9 +9,11 @@
 void MainWindow::initTodayWeatherCharts()
 {
     struct oneWeatherData{
+        double hour;
         double temperature;
+        double humidity;
+        double pressure;
         double insolation;
-        double rainfall;
     };
 
 
@@ -42,12 +44,24 @@ void MainWindow::initTodayWeatherCharts()
     QString currentEntireFileLine;
 
     // Dane wczytane z linii
+
+    // Data
     int currentLineDay;
     int currentLineMonth;
     int currentLineYear;
-    int currentLineTemperature;
-    int currentLineInsolation;
-    int currentLineRainfall;
+
+    // Godzina
+    QString currentLineHourRaw; // Format: hh:mm:ss
+    QString currentLineOnlyHour; // Format: hh
+    QString currentLineOnlyMinutes; // Foramt: mm
+    QString currentLineHourAndMinutes; // Format: hh.mm
+    double currentLineHour_double; // Format: hh.mm
+
+    // Dane pogodowe
+    double currentLineTemperature;
+    double currentLineInsolation;
+    double currentLineHumidity;
+    double currentLinePressure;
 
     QStringList allData;
     QStringList allDateData;
@@ -56,8 +70,11 @@ void MainWindow::initTodayWeatherCharts()
     QString currentLineDate;
     QString currentLineWeatherData;
 
+
     while (!in.atEnd()) {
         currentEntireFileLine = in.readLine();
+
+        // qDebug() << currentEntireFileLine;
 
         // Wyciagniecie daty i warunkow z aktualnie czytanej linii
         allData = currentEntireFileLine.split(" ");
@@ -72,32 +89,58 @@ void MainWindow::initTodayWeatherCharts()
         currentLineMonth = allDateData.at(1).toInt();
         currentLineDay = allDateData.at(2).toInt();
 
-        // Przypisanie warunkow pogodowych do zmiennych:
+        // Przypisanie warunkow pogodowych i godziny do zmiennych:
         allWeatherData = currentLineWeatherData.split("_");
-        currentLineTemperature = allWeatherData.at(2).toInt();
-        currentLineRainfall = allWeatherData.at(5).toInt();
-        currentLineInsolation = allWeatherData.at(6).toInt();
+        currentLineHourRaw = allWeatherData.at(0); // hh:mm
+        currentLineTemperature = allWeatherData.at(2).toDouble();
+        currentLineHumidity = allWeatherData.at(3).toDouble();
+        currentLinePressure = allWeatherData.at(4).toDouble();
+        currentLineInsolation = allWeatherData.at(6).toDouble();
 
-        qDebug() << "Data: " << currentLineYear << "." << currentLineMonth << "." << currentLineDay;
-        qDebug() << "Warunki" << currentLineTemperature << ", " << currentLineMonth
-                 << ", " << currentLineDay;
+        // Konwersja godziny na double //
+        QStringList hourAndDateList = currentLineHourRaw.split(":");
+        currentLineOnlyHour = hourAndDateList.at(0);
+        currentLineOnlyMinutes = hourAndDateList.at(1);
+        currentLineHourAndMinutes = currentLineOnlyHour + "." + currentLineOnlyMinutes;
+        currentLineHour_double = currentLineHourAndMinutes.toDouble(); // Format hh.mm
+
+
+        qDebug() << currentLineHour_double;
 
         // Utworzenie obiektu, przechowujacego pobrane z linii dane pogodowe
         oneWeatherData oneSignalWeatherData;
+        oneSignalWeatherData.hour = currentLineHour_double;
         oneSignalWeatherData.temperature = currentLineTemperature;
+        oneSignalWeatherData.humidity = currentLineHumidity;
+        oneSignalWeatherData.pressure = currentLinePressure;
         oneSignalWeatherData.insolation = currentLineInsolation;
-        oneSignalWeatherData.rainfall = currentLineRainfall;
 
-        // Jesli rok i miesiac sczytanej daty sie zgadza
-        if(currentLineYear == yearCur && currentLineMonth == monthCur){
-            // Jesli wczoraj
-            if(currentLineDay == (dayCur)){
-                // Dodanie do wektora wczorajszego, danych ze sczytanej linii
-                todayDataVec.push_back(oneSignalWeatherData);
-            }
+
+        // Jesli rok, miesiac i dzien sczytanej daty sie zgadza
+        if(currentLineYear == yearCur && currentLineMonth == monthCur && currentLineDay == dayCur){
+            // Dodanie do wektora dzisiejszego, danych ze sczytanej linii
+            todayDataVec.push_back(oneSignalWeatherData);
+
+
         }
+
+    }
+    file.close();
+
+
+
+
+
+
+
+    qDebug() << todayDataVec.size();
+
+    for(int i = 0; i<todayDataVec.size(); i++){
+        this->temperatureChartSeries->append(todayDataVec.at(i).hour,todayDataVec.at(i).temperature);
+        this->humidityChartSeries->append(todayDataVec.at(i).hour,todayDataVec.at(i).humidity);
+        this->pressureChartSeries->append(todayDataVec.at(i).hour,todayDataVec.at(i).pressure);
+        this->insolationChartSeries->append(todayDataVec.at(i).hour,todayDataVec.at(i).insolation);
     }
 
-    file.close();
 }
 

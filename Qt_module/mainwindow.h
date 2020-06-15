@@ -159,6 +159,7 @@ private:
     void attachSeries();
     void showChart();
 
+    void initCharts();
     void initTodayWeatherCharts();
 
 
