@@ -146,26 +146,47 @@ void weatherDataHistory::calculateAverageDayWeatherData()
         yesterdayAverageRainfall /= yesterdayDataCount;
         yesterdayAverageInsolation /= yesterdayDataCount;
     }
+    else{
+        yesterdayAverageTemperature = -274;
+        yesterdayAverageRainfall = -1;
+        yesterdayAverageInsolation = -1;
+    }
+
 
     if(twoDaysAgoDataCount > 0){
         twoDaysAgoAverageTemperature /= twoDaysAgoDataCount;
         twoDaysAgoAverageRainfall /= twoDaysAgoDataCount;
         twoDaysAgoAverageInsolation /= twoDaysAgoDataCount;
     }
+    else{
+        twoDaysAgoAverageTemperature = -274;
+        twoDaysAgoAverageRainfall  = -1;
+        twoDaysAgoAverageInsolation = -1;
+    }
+
 
     if(threeDaysAgoDataCount > 0){
         threeDaysAgoAverageTemperature /= threeDaysAgoDataCount;
         threeDaysAgoAverageRainfall /= threeDaysAgoDataCount;
         threeDaysAgoAverageInsolation /= threeDaysAgoDataCount;
     }
+    else{
+        threeDaysAgoAverageTemperature = -274;;
+        threeDaysAgoAverageRainfall = -1;
+        threeDaysAgoAverageInsolation = -1;
+    }
+
 
     if(fourDaysAgoDataCount > 0){
         fourDaysAgoAverageTemperature /= fourDaysAgoDataCount;
         fourDaysAgoAverageRainfall /= fourDaysAgoDataCount;
         fourDaysAgoAverageInsolation /= fourDaysAgoDataCount;
     }
-
-    // qDebug() << fourDaysAgoAverageTemperature;
+    else{
+        fourDaysAgoAverageTemperature = -274;
+        fourDaysAgoAverageRainfall = -1;
+        fourDaysAgoAverageInsolation = -1;
+    }
 }
 
 

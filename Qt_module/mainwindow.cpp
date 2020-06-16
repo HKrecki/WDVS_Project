@@ -75,7 +75,7 @@ void MainWindow::initCharts(){
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// \brief MainWindow::updateCharts
+/// \brief Aktualizacja i dodanie wartosci do wykresow, zmiana zakresu osi czasu
 /// \param t_temperature
 /// \param t_humidity
 /// \param t_pressure
@@ -239,8 +239,7 @@ void MainWindow::setVariablesFromFileLine()
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// \brief MainWindow::setWeatherIcon
-/// Ustawienie ikony wizualizującej warunki pogodowe
+/// \brief Ustawienie ikony wizualizującej aktualne warunki pogodowe
 void MainWindow::setWeatherIcon(int t_insolation, int t_rainfall)
 {
     int w = ui->WeatherIcon_Label->width();
@@ -267,8 +266,7 @@ void MainWindow::setWeatherIcon(int t_insolation, int t_rainfall)
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// \brief MainWindow::setDetailWeatherValues
-/// Wyswietlenie szczegolowych informacji o aktualnych warunkach pogodowych
+/// \brief Wyswietlenie szczegolowych informacji o aktualnych warunkach pogodowych
 void MainWindow::setDetailWeatherValues()
 {
     // Aktualna temperatura
@@ -283,6 +281,9 @@ void MainWindow::setDetailWeatherValues()
                                                 + "Insolation:\t" + insolationStr + "%");
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \brief Ustawienie i wyświetlenie skróconych dat, dni poprzednich
+///
 void MainWindow::showPastDates()
 {
     QLocale curLocale(QLocale("en_US"));
@@ -312,27 +313,49 @@ void MainWindow::showPastDates()
     ui->fourDaysAgoDate_label->setText(fourDaysAgoShortDate);
 }
 
-
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \brief Wyświetlenie uśrednionej temperatury z dni poprzednich
+/// \param Obiekt przechowujący informacje pogodowe z dni poprzednich
+///
 void MainWindow::showPastTemperature(weatherDataHistory t_pastData)
 {
     int yesterdayTemperatureInt = t_pastData.getYesterdayTemperature();
     int twoDaysAgoTemperatureInt = t_pastData.getTwoDaysAgoTemperature();
-    int threeDaysAgoTemperature = t_pastData.getThreeDaysAgoTemperature();
-    int fourDaysAgoTempertaure = t_pastData.getFourDaysAgoTemperature();
+    int threeDaysAgoTemperatureInt = t_pastData.getThreeDaysAgoTemperature();
+    int fourDaysAgoTemperatureInt = t_pastData.getFourDaysAgoTemperature();
 
-    // Konwersja i wyswietlenie
-    ui->yesterdayTemperature_label->setText(QString::number(yesterdayTemperatureInt) + "°C");
-    ui->twoDaysAgoTemperature_label->setText(QString::number(twoDaysAgoTemperatureInt) + "°C");
-    ui->threeDaysAgoTemeperature_label->setText(QString::number(threeDaysAgoTemperature)+ "°C");
-    ui->fourDaysAgoTemperature_label->setText(QString::number(fourDaysAgoTempertaure) + "°C");
+    // TODO: Wyswietlenie no data w przypadku braku informacji, gdy temperatura = -100
+    if(yesterdayTemperatureInt <= -274)
+        ui->yesterdayTemperature_label->setText("No data");
+    else
+        ui->yesterdayTemperature_label->setText(QString::number(yesterdayTemperatureInt) + "°C");
 
-    qDebug() << twoDaysAgoTemperatureInt;
+
+    if(twoDaysAgoTemperatureInt <= -274)
+        ui->twoDaysAgoTemperature_label->setText("No data");
+    else
+        ui->twoDaysAgoTemperature_label->setText(QString::number(twoDaysAgoTemperatureInt) + "°C");
+
+
+    if(threeDaysAgoTemperatureInt <= -274)
+        ui->threeDaysAgoTemeperature_label->setText("No data");
+    else
+        ui->threeDaysAgoTemeperature_label->setText(QString::number(threeDaysAgoTemperatureInt) + "°C");
+
+
+    if(fourDaysAgoTemperatureInt <= -274)
+        ui->fourDaysAgoTemperature_label->setText("No data");
+    else
+        ui->fourDaysAgoTemperature_label->setText(QString::number(fourDaysAgoTemperatureInt) + "°C");
 }
 
 
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \brief Ustawia ikonę pogodową dla poprzednich dni, w zależności, od zebranych do 4 dni temu, danych.
+/// \param obiekt klasy weatherDataHistory, przechowujący dane pogodowe z danej sesji.
+///
+///
 void MainWindow::showPastIcons(weatherDataHistory t_pastData)
 {
     int _currentRainfall = 0;
