@@ -17,6 +17,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->SettingsTabConnectPushButton->setEnabled(false);
+    ui->SettingsTabDisconnectPushButton->setEnabled(false);
 
 
     // Historia warunkow pogodowych //
@@ -65,6 +67,9 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+/*!
+ * \brief MainWindow::initCharts
+ */
 void MainWindow::initCharts(){
     this->temperatureChartSeries->append(0, 0);
 }
@@ -115,6 +120,7 @@ void MainWindow::on_SettingsTabSearchPushButton_clicked()
     for(int i = 0; i < devices.count(); i++){
         addToLogs("Found: " + devices.at(i).portName() + " " + devices.at(i).description());
         ui->SettingsTabDevices_ComboBox->addItem(devices.at(i).portName() + " " + devices.at(i).description());
+        ui->SettingsTabConnectPushButton->setEnabled(true);
     }
 }
 
@@ -414,6 +420,8 @@ void MainWindow::on_SettingsTabConnectPushButton_clicked()
 
 
             this->addToLogs("The serial port is now open");
+            ui->SettingsTabConnectPushButton->setEnabled(false);
+            ui->SettingsTabDisconnectPushButton->setEnabled(true);
 
             // Ustawienie ikony symbolizujacej status polaczenia - ON
             setConnectionStatusImage(true);
@@ -453,6 +461,8 @@ void MainWindow::on_SettingsTabDisconnectPushButton_clicked()
     if(this->device->isOpen()){
         this->device->close();
         this->addToLogs("The port has been closed ");
+        ui->SettingsTabDisconnectPushButton->setEnabled(false);
+        ui->SettingsTabConnectPushButton->setEnabled(true);
     } else{
         this->addToLogs("The port is already closed ");
     }

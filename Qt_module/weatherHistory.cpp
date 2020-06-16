@@ -127,14 +127,7 @@ void MainWindow::initTodayWeatherCharts()
     }
     file.close();
 
-
-
-
-
-
-
-    qDebug() << todayDataVec.size();
-
+    // Inicjalizacja wykresow, wartosciami, ktore zostaly zebrane wczesniej, tego samego dnia
     for(int i = 0; i<todayDataVec.size(); i++){
         this->temperatureChartSeries->append(todayDataVec.at(i).hour,todayDataVec.at(i).temperature);
         this->humidityChartSeries->append(todayDataVec.at(i).hour,todayDataVec.at(i).humidity);
