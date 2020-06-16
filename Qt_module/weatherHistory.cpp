@@ -74,7 +74,6 @@ void MainWindow::initTodayWeatherCharts()
     while (!in.atEnd()) {
         currentEntireFileLine = in.readLine();
 
-        // qDebug() << currentEntireFileLine;
 
         // Wyciagniecie daty i warunkow z aktualnie czytanej linii
         allData = currentEntireFileLine.split(" ");
@@ -104,8 +103,6 @@ void MainWindow::initTodayWeatherCharts()
         currentLineHourAndMinutes = currentLineOnlyHour + "." + currentLineOnlyMinutes;
         currentLineHour_double = currentLineHourAndMinutes.toDouble(); // Format hh.mm
 
-
-        qDebug() << currentLineHour_double;
 
         // Utworzenie obiektu, przechowujacego pobrane z linii dane pogodowe
         oneWeatherData oneSignalWeatherData;

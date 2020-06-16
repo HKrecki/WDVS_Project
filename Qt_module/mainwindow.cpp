@@ -314,8 +314,8 @@ void MainWindow::showPastDates()
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// \brief Wyświetlenie uśrednionej temperatury z dni poprzednich
-/// \param Obiekt przechowujący informacje pogodowe z dni poprzednich
+/// \brief Wyświetlenie uśrednionej temperatury z dni poprzednich.
+/// \param Obiekt przechowujący informacje pogodowe z dni poprzednich.
 ///
 void MainWindow::showPastTemperature(weatherDataHistory t_pastData)
 {
@@ -353,7 +353,7 @@ void MainWindow::showPastTemperature(weatherDataHistory t_pastData)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// \brief Ustawia ikonę pogodową dla poprzednich dni, w zależności, od zebranych do 4 dni temu, danych.
-/// \param obiekt klasy weatherDataHistory, przechowujący dane pogodowe z danej sesji.
+/// \param obiekt klasy weatherDataHistory, przechowujący dane pogodowe z danego dnia.
 ///
 ///
 void MainWindow::showPastIcons(weatherDataHistory t_pastData)
@@ -366,54 +366,56 @@ void MainWindow::showPastIcons(weatherDataHistory t_pastData)
     int _h = ui->Day1ago_label->height();
 
     QPixmap pix;
-    pix.load(":/resources/img/sunny.png");
+    pix.load(":/resources/img/wifi.png");
 
     for(int i =0; i<4; i++){
         switch(i){
             case 0:
-                currentRainfall = t_pastData.getYesterdayRainfall();
-                currentInsolation = t_pastData.getYesterdayInsolation();
+                _currentRainfall = t_pastData.getYesterdayRainfall();
+                _currentInsolation = t_pastData.getYesterdayInsolation();
                 break;
             case 1:
-                currentRainfall = t_pastData.getTwoDaysAgoRainfall();
-                currentRainfall = t_pastData.getTwoDaysAgoInsolation();
+                _currentRainfall = t_pastData.getTwoDaysAgoRainfall();
+                _currentInsolation = t_pastData.getTwoDaysAgoInsolation();
                 break;
             case 2:
-                currentRainfall = t_pastData.getThreeDaysAgoRainfall();
-                currentRainfall = t_pastData.getThreeDaysAgoInsolation();
+                _currentRainfall = t_pastData.getThreeDaysAgoRainfall();
+                _currentInsolation = t_pastData.getThreeDaysAgoInsolation();
                 break;
             case 3:
-                currentRainfall = t_pastData.getFourDaysAgoRainfall();
-                currentRainfall = t_pastData.getFourDaysAgoInsolation();
+                _currentRainfall = t_pastData.getFourDaysAgoRainfall();
+                _currentInsolation = t_pastData.getFourDaysAgoInsolation();
                 break;
         }
 
 
-        if(_currentInsolation > 50 && _currentRainfall < 10){
+
+        if(_currentInsolation > 50 && _currentRainfall >= 0 && _currentRainfall < 10){
             pix.load(":/resources/img/sunny.png");
         }
-        else if(_currentInsolation <= 50 && _currentRainfall < 10){
+        else if((_currentInsolation <= 50 && _currentInsolation >= 0)
+                && (_currentRainfall < 10 && _currentRainfall >= 0)){
             pix.load(":/resources/img/cloudy.png");
         }
         else if(_currentRainfall >= 10){
             pix.load(":/resources/img/rain.png");
         }
+        else if(_currentRainfall <= -1 && _currentInsolation <= -1){
+            pix.load(":/resources/img/wifi.png");
+        }
+
 
         switch(i){
             case 0:
                 ui->Day1ago_label->setPixmap(pix.scaled(_w, _h, Qt::KeepAspectRatio));
-                ui->Day1ago_label->setPixmap(pix.scaled(_w, _h, Qt::KeepAspectRatio));
                 break;
             case 1:
-                ui->Day2ago_label->setPixmap(pix.scaled(_w, _h, Qt::KeepAspectRatio));
                 ui->Day2ago_label->setPixmap(pix.scaled(_w, _h, Qt::KeepAspectRatio));
                 break;
             case 2:
                 ui->Day3ago_label->setPixmap(pix.scaled(_w, _h, Qt::KeepAspectRatio));
-                ui->Day3ago_label->setPixmap(pix.scaled(_w, _h, Qt::KeepAspectRatio));
                 break;
             case 3:
-                ui->Day4ago_label->setPixmap(pix.scaled(_w, _h, Qt::KeepAspectRatio));
                 ui->Day4ago_label->setPixmap(pix.scaled(_w, _h, Qt::KeepAspectRatio));
                 break;
         }
