@@ -1,6 +1,12 @@
 #ifndef WEATHERDATAHISTORY_H
 #define WEATHERDATAHISTORY_H
 
+/*!
+  * \file
+  * \brief Plik zawierający klasę weatheDataHistory, obsługującązebrane w dniach poprzednich dane.
+  */
+
+
 #include <QVector>
 #include <QString>
 #include <QDateTime>

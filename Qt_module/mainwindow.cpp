@@ -74,9 +74,9 @@ MainWindow::~MainWindow()
 /*!
  * \brief MainWindow::initCharts
  */
-void MainWindow::initCharts(){
-    this->temperatureChartSeries->append(0, 0);
-}
+//void MainWindow::initCharts(){
+//    this->temperatureChartSeries->append(0, 0);
+// }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// \brief Aktualizacja i dodanie wartosci do wykresow, zmiana zakresu osi czasu
@@ -89,9 +89,6 @@ void MainWindow::initCharts(){
 
 void MainWindow::updateCharts(unsigned long long t_time)
 {
-    // long double currentTime = ((long double)t_time)/1000;
-
-    // TODO: Odczytac aktualna godzine, przekonwertowac na liczbe i wstawic do wykresu
     QTime time = QTime::currentTime();
     QString timeStr = time.toString("hh.mm");
 
@@ -198,8 +195,6 @@ void MainWindow::readFromFile()
 
     QTextStream in(&file); // Save to file
     QString text = in.readAll();
-
-    // ui->test_textEdit->setPlainText(text);
 
     file.close();
 }
