@@ -13,7 +13,18 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(17, 17, 17);
+QMainWindow::separator 
+{
+width: 1px;
+ border: none;
+}</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">background-color: rgba(37, 39, 40);</string>
+   </property>
    <layout class="QGridLayout" name="gridLayout_2">
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
@@ -26,17 +37,42 @@
        <cursorShape>ArrowCursor</cursorShape>
       </property>
       <property name="styleSheet">
-       <string notr="true"/>
+       <string notr="true">QTabBar::tab  {
+    background: rgb(20, 20, 20);
+}
+
+QTabBar::tab 
+{
+font-size:30pt;
+color: rgb(255,255,255)
+}
+
+background-color: rgb(45, 46, 48);
+
+QTabWidget::pane { border: 0; }
+</string>
       </property>
       <property name="tabShape">
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
+      </property>
+      <property name="documentMode">
+       <bool>true</bool>
+      </property>
+      <property name="tabBarAutoHide">
+       <bool>true</bool>
       </property>
       <widget class="QWidget" name="DashboardTab">
        <property name="autoFillBackground">
         <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QTabBar::tab{
+	textColor: rgb(255, 255, 255);
+}
+</string>
        </property>
        <attribute name="title">
         <string>DASHBOARD</string>
@@ -45,8 +81,9 @@
         <item row="0" column="0">
          <widget class="QFrame" name="frame">
           <property name="styleSheet">
-           <string notr="true">border-color: rgb(0, 0, 0);
-border: 5px solid black </string>
+           <string notr="true">background-color: rgb(61, 62, 64);
+border-bottom: 2px solid black;
+border-bottom-color: rgb(255, 255, 255);</string>
           </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -68,7 +105,8 @@ border: 5px solid black </string>
               <enum>Qt::LeftToRight</enum>
              </property>
              <property name="styleSheet">
-              <string notr="true">border:  solid black </string>
+              <string notr="true">color: rgb(255, 255, 255);
+border: 0px solid black </string>
              </property>
              <property name="text">
               <string/>
@@ -86,7 +124,8 @@ border: 5px solid black </string>
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">border: 0px solid black </string>
+              <string notr="true">color: rgb(255, 255, 255);
+border: 0px solid black </string>
              </property>
              <property name="text">
               <string/>
@@ -102,8 +141,9 @@ border: 5px solid black </string>
         <item row="0" column="1">
          <widget class="QFrame" name="frame_2">
           <property name="styleSheet">
-           <string notr="true">border-color: rgb(0, 0, 0);
-border: 5px solid black </string>
+           <string notr="true">background-color: rgb(61, 62, 64);
+border-bottom: 2px solid black;
+border-bottom-color: rgb(255, 255, 255);</string>
           </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -134,8 +174,9 @@ border: 5px solid black </string>
         <item row="0" column="2">
          <widget class="QFrame" name="frame_3">
           <property name="styleSheet">
-           <string notr="true">border-color: rgb(0, 0, 0);
-border: 5px solid black </string>
+           <string notr="true">background-color: rgb(61, 62, 64);
+border-bottom: 2px solid black;
+border-bottom-color: rgb(255, 255, 255);</string>
           </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -152,7 +193,8 @@ border: 5px solid black </string>
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">border: 0px solid black </string>
+              <string notr="true">color: rgb(180, 201, 23);
+border: 0px solid black </string>
              </property>
              <property name="text">
               <string/>
@@ -168,8 +210,9 @@ border: 5px solid black </string>
         <item row="0" column="3">
          <widget class="QFrame" name="frame_4">
           <property name="styleSheet">
-           <string notr="true">border-color: rgb(0, 0, 0);
-border: 5px solid black </string>
+           <string notr="true">background-color: rgb(61, 62, 64);
+border-bottom: 2px solid black;
+border-bottom-color: rgb(255, 255, 255);</string>
           </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -198,7 +241,8 @@ border: 5px solid black </string>
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">border: 0px solid black </string>
+              <string notr="true">border: 0px solid black ;
+color: rgb(255, 255, 255);</string>
              </property>
              <property name="text">
               <string>DETAILS</string>
@@ -216,7 +260,8 @@ border: 5px solid black </string>
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">border: 0px solid black </string>
+              <string notr="true">border: 0px solid black ;
+color: rgb(255, 255, 255);</string>
              </property>
              <property name="text">
               <string/>
@@ -243,7 +288,7 @@ border: 5px solid black </string>
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">color: rgb(255, 255, 255);</string>
           </property>
           <property name="text">
            <string>LAST 4 DAYS</string>
@@ -253,8 +298,10 @@ border: 5px solid black </string>
         <item row="2" column="0">
          <widget class="QFrame" name="frame_5">
           <property name="styleSheet">
-           <string notr="true">border-color: rgb(0, 0, 0);
-border: 5px solid black </string>
+           <string notr="true">background-color: rgb(61, 62, 64);
+boarder-radios: 10px;
+ border-radius: 10px;
+</string>
           </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -301,7 +348,8 @@ border: 5px solid black </string>
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">border: 0px solid black </string>
+              <string notr="true">border: 0px solid black ;
+color: rgb(255, 255, 255);</string>
              </property>
              <property name="text">
               <string>June 8</string>
@@ -319,7 +367,8 @@ border: 5px solid black </string>
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">border: 0px solid black </string>
+              <string notr="true">border: 0px solid black ;
+color: rgb(255, 255, 255);</string>
              </property>
              <property name="text">
               <string/>
@@ -335,8 +384,9 @@ border: 5px solid black </string>
         <item row="2" column="2">
          <widget class="QFrame" name="frame_7">
           <property name="styleSheet">
-           <string notr="true">border-color: rgb(0, 0, 0);
-border: 5px solid black </string>
+           <string notr="true">background-color: rgb(61, 62, 64);
+ border-radius: 10px;
+</string>
           </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -359,7 +409,8 @@ border: 5px solid black </string>
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">border: 0px solid black </string>
+              <string notr="true">border: 0px solid black ;
+color: rgb(255, 255, 255);</string>
              </property>
              <property name="text">
               <string>June 6</string>
@@ -401,7 +452,8 @@ border: 5px solid black </string>
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">border: 0px solid black </string>
+              <string notr="true">border: 0px solid black ;
+color: rgb(255, 255, 255);</string>
              </property>
              <property name="text">
               <string>25 °C</string>
@@ -417,8 +469,9 @@ border: 5px solid black </string>
         <item row="2" column="3">
          <widget class="QFrame" name="frame_8">
           <property name="styleSheet">
-           <string notr="true">border-color: rgb(0, 0, 0);
-border: 5px solid black </string>
+           <string notr="true">background-color: rgb(77, 78, 80);
+ border-radius: 10px;
+</string>
           </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -441,7 +494,8 @@ border: 5px solid black </string>
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">border: 0px solid black </string>
+              <string notr="true">border: 0px solid black ;
+color: rgb(255, 255, 255);</string>
              </property>
              <property name="text">
               <string>June 5</string>
@@ -483,7 +537,8 @@ border: 5px solid black </string>
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">border: 0px solid black </string>
+              <string notr="true">border: 0px solid black ;
+color: rgb(255, 255, 255);</string>
              </property>
              <property name="text">
               <string>21 °C</string>
@@ -499,8 +554,9 @@ border: 5px solid black </string>
         <item row="2" column="1">
          <widget class="QFrame" name="frame_6">
           <property name="styleSheet">
-           <string notr="true">border-color: rgb(0, 0, 0);
-border: 5px solid black </string>
+           <string notr="true">background-color: rgb(77, 78, 80);
+ border-radius: 10px;
+</string>
           </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -523,7 +579,8 @@ border: 5px solid black </string>
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">border: 0px solid black </string>
+              <string notr="true">border: 0px solid black ;
+color: rgb(255, 255, 255);</string>
              </property>
              <property name="text">
               <string>June 7</string>
@@ -565,7 +622,8 @@ border: 5px solid black </string>
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">border: 0px solid black </string>
+              <string notr="true">border: 0px solid black ;
+color: rgb(255, 255, 255);</string>
              </property>
              <property name="text">
               <string>19 °C</string>

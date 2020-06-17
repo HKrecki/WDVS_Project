@@ -14,17 +14,17 @@
 
 
 void MainWindow::createSeries(){
+
+    // Customize series
+    QPen pen(RGB(0,255,68));
+    pen.setWidth(5);
+
     this->temperatureChartSeries = new QLineSeries();
-    // this->temperatureChartSeries->append(0,0);
-
     this->humidityChartSeries = new QLineSeries();
-    // this->humidityChartSeries->append(0,0);
-
     this->insolationChartSeries = new QLineSeries();
-    // this->insolationChartSeries->append(0,0);
-
     this->pressureChartSeries = new QLineSeries();
-    // this->pressureChartSeries->append(0,0);
+
+    temperatureChartSeries->setPen(pen);
 }
 
 void MainWindow::createAxes(){
@@ -74,12 +74,36 @@ void MainWindow::createAxes(){
 }
 
 void MainWindow::makeChart(){
+
+    QLinearGradient backgroundGradient;
+
     this->temperatureChart = new QChart();
     this->temperatureChart->addAxis(temperatureValueAxis,Qt::AlignLeft);
     this->temperatureChart->addAxis(this->temperatureTimelineAxis,Qt::AlignBottom);
     this->temperatureChart->addSeries(this->temperatureChartSeries);
     this->temperatureChart->setTitle("Temperature [°C]");
     this->temperatureChart->legend()->hide();
+
+    backgroundGradient.setStart(QPointF(0, 0));
+       backgroundGradient.setFinalStop(QPointF(0, 1));
+       backgroundGradient.setColorAt(0.0, QRgb(0xd2d0d1));
+       backgroundGradient.setColorAt(1.0, QRgb(0x4c4547));
+       backgroundGradient.setCoordinateMode(QGradient::ObjectBoundingMode);
+       temperatureChart->setBackgroundBrush(backgroundGradient);
+
+       QLinearGradient plotAreaGradient;
+           plotAreaGradient.setStart(QPointF(1, 0));
+           plotAreaGradient.setFinalStop(QPointF(0, 1));
+           plotAreaGradient.setColorAt(0.0, QRgb(0x555555));
+           plotAreaGradient.setColorAt(1.0, QRgb(0x555555));
+           plotAreaGradient.setCoordinateMode(QGradient::ObjectBoundingMode);
+           temperatureChart->setPlotAreaBackgroundBrush(plotAreaGradient);
+           temperatureChart->setPlotAreaBackgroundVisible(true);
+
+
+
+
+
 
     this->humidityChart = new QChart();
     this->humidityChart->addAxis(humidityValueAxis, Qt::AlignLeft);

@@ -19,6 +19,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->SettingsTabConnectPushButton->setEnabled(false);
     ui->SettingsTabDisconnectPushButton->setEnabled(false);
+    setStyle();
+
+    // Ustawienie stylu wykresow
+
 
 
     // Historia warunkow pogodowych //
@@ -248,16 +252,16 @@ void MainWindow::setWeatherIcon(int t_insolation, int t_rainfall)
     // Sloneczna pogoda
     if(t_insolation > 50 && t_rainfall < 10){
         // Slonecznie
-        QPixmap pix(":/resources/img/sunny.png");
+        QPixmap pix(":/resources/img/sun.png");
         ui->WeatherIcon_Label->setPixmap(pix.scaled(w, h, Qt::KeepAspectRatio));
     }
     else if(t_insolation <= 50 && t_rainfall < 10){ // Pochumrno
         // Pochmurno
-        QPixmap pix(":/resources/img/cloudy.png");
+        QPixmap pix(":/resources/img/cloud.png");
         ui->WeatherIcon_Label->setPixmap(pix.scaled(w, h, Qt::KeepAspectRatio));
     }
     else if(t_rainfall >= 10) { // Deszczowo
-        QPixmap pix(":/resources/img/rain.png");
+        QPixmap pix(":/resources/img/rainy.png");
         ui->WeatherIcon_Label->setPixmap(pix.scaled(w, h, Qt::KeepAspectRatio));
     }
 
@@ -366,7 +370,7 @@ void MainWindow::showPastIcons(weatherDataHistory t_pastData)
     int _h = ui->Day1ago_label->height();
 
     QPixmap pix;
-    pix.load(":/resources/img/wifi.png");
+    pix.load(":/resources/img/XnoData.png");
 
     for(int i =0; i<4; i++){
         switch(i){
@@ -391,17 +395,17 @@ void MainWindow::showPastIcons(weatherDataHistory t_pastData)
 
 
         if(_currentInsolation > 50 && _currentRainfall >= 0 && _currentRainfall < 10){
-            pix.load(":/resources/img/sunny.png");
+            pix.load(":/resources/img/sun.png");
         }
         else if((_currentInsolation <= 50 && _currentInsolation >= 0)
                 && (_currentRainfall < 10 && _currentRainfall >= 0)){
-            pix.load(":/resources/img/cloudy.png");
+            pix.load(":/resources/img/cloud.png");
         }
         else if(_currentRainfall >= 10){
-            pix.load(":/resources/img/rain.png");
+            pix.load(":/resources/img/rainy.png");
         }
         else if(_currentRainfall <= -1 && _currentInsolation <= -1){
-            pix.load(":/resources/img/wifi.png");
+            pix.load(":/resources/img/XnoData.png");
         }
 
 
@@ -577,6 +581,15 @@ void MainWindow::clockTimerFctn()
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \brief Ustawia wygląd interfejsu
+///
+
+void MainWindow::setStyle()
+{
+    ui->statusbar->setStyleSheet("color: rgb(255, 255, 255);");
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// \brief MainWindow::resizeEvent
 /// \param event
 /// Zmiana wielkosci wykresu w zaleznosci od zmiany rozmiaru okna(rodzica)
@@ -590,4 +603,10 @@ void MainWindow::resizeEvent(QResizeEvent* event){
     this->pressureChartView->resize(this->pressureChartView->parentWidget()->size());
 }
 
+void MainWindow::on_pushButton_clicked(){
 
+}
+
+void MainWindow::on_tabWidget_tabBarClicked(int a){
+
+}
