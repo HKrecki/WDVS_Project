@@ -39,6 +39,17 @@ void MainWindow::createAxes(){
     this->temperatureValueAxis->setRange(-20,40);
     this->temperatureValueAxis->setTickCount(4);
 
+    QPen axisPen(RGB(255,255,255));
+    axisPen.setWidth(2);
+    temperatureValueAxis->setLinePen(axisPen);
+    temperatureTimelineAxis->setLinePen(axisPen);
+
+    QBrush axisBrush(Qt::white);
+    temperatureValueAxis->setLabelsBrush(axisBrush);
+    temperatureTimelineAxis->setLabelsBrush(axisBrush);
+
+
+
     // Humidity
     this->humidityTimelineAxis = new QValueAxis;
     this->humidityTimelineAxis->setLabelFormat("%.2f");
@@ -81,26 +92,32 @@ void MainWindow::makeChart(){
     this->temperatureChart->addAxis(temperatureValueAxis,Qt::AlignLeft);
     this->temperatureChart->addAxis(this->temperatureTimelineAxis,Qt::AlignBottom);
     this->temperatureChart->addSeries(this->temperatureChartSeries);
-    this->temperatureChart->setTitle("Temperature [°C]");
     this->temperatureChart->legend()->hide();
 
+    // Ustawienie tla
     backgroundGradient.setStart(QPointF(0, 0));
-       backgroundGradient.setFinalStop(QPointF(0, 1));
-       backgroundGradient.setColorAt(0.0, QRgb(0xd2d0d1));
-       backgroundGradient.setColorAt(1.0, QRgb(0x4c4547));
-       backgroundGradient.setCoordinateMode(QGradient::ObjectBoundingMode);
-       temperatureChart->setBackgroundBrush(backgroundGradient);
+    backgroundGradient.setFinalStop(QPointF(0, 1));
+    backgroundGradient.setColorAt(0.0,  RGB(61, 62, 64));
+    backgroundGradient.setColorAt(1.0,  RGB(61, 62, 64));
+    backgroundGradient.setCoordinateMode(QGradient::ObjectBoundingMode);
+    temperatureChart->setBackgroundBrush(backgroundGradient);
 
-       QLinearGradient plotAreaGradient;
-           plotAreaGradient.setStart(QPointF(1, 0));
-           plotAreaGradient.setFinalStop(QPointF(0, 1));
-           plotAreaGradient.setColorAt(0.0, QRgb(0x555555));
-           plotAreaGradient.setColorAt(1.0, QRgb(0x555555));
-           plotAreaGradient.setCoordinateMode(QGradient::ObjectBoundingMode);
-           temperatureChart->setPlotAreaBackgroundBrush(plotAreaGradient);
-           temperatureChart->setPlotAreaBackgroundVisible(true);
+    // Ustawienie tla rysowania
+    QLinearGradient plotAreaGradient;
+    plotAreaGradient.setStart(QPointF(1, 0));
+    plotAreaGradient.setFinalStop(QPointF(0, 1));
+    plotAreaGradient.setColorAt(1.0, QRgb(0xFFFF00));
+    plotAreaGradient.setColorAt(0.0, QRgb(0xFF6347));
+    plotAreaGradient.setCoordinateMode(QGradient::ObjectBoundingMode);
+    temperatureChart->setPlotAreaBackgroundBrush(plotAreaGradient);
+    temperatureChart->setPlotAreaBackgroundVisible(true);
 
-
+    // Ustawienie tytulu
+    QFont font;
+    font.setPixelSize(18);
+    temperatureChart->setTitleFont(font);
+    temperatureChart->setTitleBrush(QBrush(Qt::white));
+    temperatureChart->setTitle("Temperature [°C]");
 
 
 
