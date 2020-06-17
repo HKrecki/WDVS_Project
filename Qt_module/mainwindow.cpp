@@ -1,6 +1,14 @@
+/*!
+ * \file
+ * \brief Plik zawierający funkcje obsługi głównego okna aplikacji.
+ *
+ *
+ *
+ */
+
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-// #include <settingstab.h>
 
 #include <QDebug>
 #include <QList>
@@ -11,7 +19,6 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// \brief Konstruktor okna głównego
 /// \param parent
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -64,29 +71,23 @@ MainWindow::MainWindow(QWidget *parent)
     clockTimer = new QTimer(this);
     connect(clockTimer, SIGNAL(timeout()), this, SLOT(clockTimerFctn()));
     clockTimer->start(1000);
+
+    ui->tabWidget->setCurrentWidget(ui->DashboardTab);
 }
 
+/*!
+ * \brief Destruktor okna głównego
+ */
 MainWindow::~MainWindow()
 {
     delete ui;
 }
 
+
 /*!
- * \brief MainWindow::initCharts
+ * \brief Metoda uaktualniająca wykresy o najnowsze, zebrane dane.
+ * \param Argument potrzebny do przydzielenia wartości, do osi czasu na wykresie.
  */
-//void MainWindow::initCharts(){
-//    this->temperatureChartSeries->append(0, 0);
-// }
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// \brief Aktualizacja i dodanie wartosci do wykresow, zmiana zakresu osi czasu
-/// \param t_temperature
-/// \param t_humidity
-/// \param t_pressure
-/// \param t_insolation
-/// \param t_time
-/// Aktualizacja i dodanie wartosci do wykresow, zmiana zakresu osi czasu
-
 void MainWindow::updateCharts(unsigned long long t_time)
 {
     QTime time = QTime::currentTime();
@@ -103,13 +104,19 @@ void MainWindow::updateCharts(unsigned long long t_time)
 }
 
 
-
+/*!
+ * \brief Slot aktywowany po wyborze okna o indeksie, podanym jako parametr.
+ * \param Indeks zmienionego okna.
+ */
 void MainWindow::on_tabWidget_currentChanged(int index)
 {
 
 }
 
 
+/*!
+ * \brief Slot, dotyczący kliknięcia przycisku Search. Odpiwada za wykrycie aktualnie podłączonych urządzeń.
+ */
 void MainWindow::on_SettingsTabSearchPushButton_clicked()
 {
     ui->SettingsTabDevices_ComboBox->clear();
@@ -126,7 +133,10 @@ void MainWindow::on_SettingsTabSearchPushButton_clicked()
 }
 
 
-
+/*!
+ * \brief Metoda dodająca informacje do logu w zakładce ustawienia
+ * \param Wiadomość przekazywana do logu.
+ */
 void MainWindow::addToLogs(QString message)
 {
     QString currentDateTime = QDateTime::currentDateTime().toString("yyyy.MM.dd hh:mm:ss");
@@ -134,9 +144,9 @@ void MainWindow::addToLogs(QString message)
 }
 
 
-//////////////////////////////////
-// Obsluga informacji o polaczeniu
-//////////////////////////////////
+/*!
+ * \brief Metoda inicjalizująca informacje dotyczące połączenia, jeszcze przed nawiązaniem kontaktu.
+ */
 void MainWindow::initConnectionInformation()
 {
     this->connectionStatus = "Not connected";
@@ -150,11 +160,15 @@ void MainWindow::initConnectionInformation()
     ui->statusbar->showMessage("Disconnected");
 }
 
+
+/*!
+ * \brief Metoda wyświetlająca aktualne informacje dotyczące połączenia, już po nawiązniu kontaktu.
+ */
 void MainWindow::displayConnectionInformation()
 {
     ui->ConnectionInformation_TextEdit->clear();
 
-    ui->ConnectionInformation_TextEdit->append("Connection Status:\t" + this->connectionStatus);
+    ui->ConnectionInformation_TextEdit->append("Connection Status:\t\t" + this->connectionStatus);
     ui->ConnectionInformation_TextEdit->append("Baudrate:\t\t" + this->baudrate);
     ui->ConnectionInformation_TextEdit->append("Data bits:\t\t" + this->dataBits);
     ui->ConnectionInformation_TextEdit->append("Parity:\t\t\t" + this->parity);
@@ -162,10 +176,10 @@ void MainWindow::displayConnectionInformation()
     ui->ConnectionInformation_TextEdit->append("Flow control:\t\t" + this->flowControl);
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// \brief MainWindow::setConnectionStatusImage
-/// \param t_connectionStatus - Jeśli polaczenie jest aktywne - true, jesli nie - false
-///
+/*!
+ * \brief Metoda ustawiająca ikonę wizualizującą stan połączenia.
+ * \param Stan połączenia: true - połączenie aktywne, false - brak połączenia.
+ */
 void MainWindow::setConnectionStatusImage(bool t_connectionStatus)
 {
     QString status = "OFF";
@@ -186,6 +200,10 @@ void MainWindow::setConnectionStatusImage(bool t_connectionStatus)
 
 }
 
+
+/*!
+ * \brief Metoda zapisujące dane z logu do pliku.
+ */
 void MainWindow::readFromFile()
 {
     QFile file("../Qt_Module/data.txt");
@@ -237,8 +255,11 @@ void MainWindow::setVariablesFromFileLine()
     this->currentInsolation = insolationStr.split(" ")[0].toDouble(&ok);
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// \brief Ustawienie ikony wizualizującej aktualne warunki pogodowe
+/*!
+ * \brief Metoda ustawiająca ikonnę, wizualizującą aktualne warunki pogodowe.
+ * \param Aktualne nasłonecznienie.
+ * \param Aktualne natężenie opadów.
+ */
 void MainWindow::setWeatherIcon(int t_insolation, int t_rainfall)
 {
     int w = ui->WeatherIcon_Label->width();
@@ -314,7 +335,7 @@ void MainWindow::showPastDates()
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// \brief Wyświetlenie uśrednionej temperatury z dni poprzednich.
-/// \param Obiekt przechowujący informacje pogodowe z dni poprzednich.
+/// \param Obiekt przechowujący uśrednione dane pogodowe z dni poprzednich.
 ///
 void MainWindow::showPastTemperature(weatherDataHistory t_pastData)
 {
@@ -469,6 +490,7 @@ void MainWindow::on_SettingsTabConnectPushButton_clicked()
     }
     else{
         this->addToLogs("The port is already open");
+        ui->SettingsTabConnectPushButton->setEnabled(false);
     }
 
 
@@ -478,7 +500,7 @@ void MainWindow::on_SettingsTabConnectPushButton_clicked()
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// \brief MainWindow::on_SettingsTabDisconnectPushButton_clicked
+/// \brief Metoda odpowiedzialna za połączenie z urządzeniem i ustawienie ikony połączenia.
 /// Obsługa przycisku rozłącz - Rozłączenie z urządzeniem
 void MainWindow::on_SettingsTabDisconnectPushButton_clicked()
 {
@@ -501,7 +523,7 @@ void MainWindow::on_SettingsTabDisconnectPushButton_clicked()
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// \brief MainWindow::readFromPort
+/// \brief Metoda odczytująca dane z urządzenia.
 /// Odczytanie danych z urządzenia
 void MainWindow::readFromPort()
 {
@@ -558,7 +580,7 @@ void MainWindow::readFromPort()
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// \brief MainWindow::clockTimerFctn
+/// \brief Metoda wyświetlająca aktualną godzinę na pulpicie.
 /// Obsługa daty wyświetlanej na pulpicie
 void MainWindow::clockTimerFctn()
 {
@@ -576,17 +598,16 @@ void MainWindow::clockTimerFctn()
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// \brief Ustawia wygląd interfejsu
+/// \brief Ustawia wygląd interfejsu, w miejscach gdzie pyło to utrudnione z poziomu designera.
 ///
-
 void MainWindow::setStyle()
 {
     ui->statusbar->setStyleSheet("color: rgb(255, 255, 255);");
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// \brief MainWindow::resizeEvent
-/// \param event
+/// \brief Metoda zmiany rozmiaru okna w zależności od akcji
+/// \param Event dotyczączący zmiany rozmiaru okna.
 /// Zmiana wielkosci wykresu w zaleznosci od zmiany rozmiaru okna(rodzica)
 void MainWindow::resizeEvent(QResizeEvent* event){
 
@@ -598,10 +619,18 @@ void MainWindow::resizeEvent(QResizeEvent* event){
     this->pressureChartView->resize(this->pressureChartView->parentWidget()->size());
 }
 
+/*!
+ * \brief Slot odpowiedzialny za naciśnięcie przycisku.
+ */
 void MainWindow::on_pushButton_clicked(){
 
 }
 
+
+/*!
+ * \brief Metoda odpowiedzialna za wybór wskazanej karty
+ * \param numer karty.
+ */
 void MainWindow::on_tabWidget_tabBarClicked(int a){
 
 }

@@ -1,3 +1,9 @@
+/*!
+  * \file
+  * Plik zawierający definicje metod klasy, odpowiedzilnej za obsługę danych zebranych w przesszłości.
+  *
+  */
+
 #include "weatherdatahistory.h"
 
 weatherDataHistory::weatherDataHistory()
@@ -190,12 +196,12 @@ void weatherDataHistory::calculateAverageDayWeatherData()
 }
 
 
-
+/*
 char weatherDataHistory::selectWeatherIcon(int t_daysAgoNumber) const
 {
 
 }
-
+*/
 
 
 

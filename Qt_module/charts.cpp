@@ -12,7 +12,11 @@
 #include "mainwindow.h"
 
 
-
+/*!
+ * \brief Metoda tworząca serię danych dla wykresów.
+ *
+ *  Ustawiany jest również kolor i grubość linii.
+ */
 void MainWindow::createSeries(){
 
     // Customize series
@@ -28,10 +32,10 @@ void MainWindow::createSeries(){
     QPen penP(QRgb(0x000000));
     penP.setWidth(3);
 
-    this->temperatureChartSeries = new QLineSeries();
-    this->humidityChartSeries = new QLineSeries();
-    this->insolationChartSeries = new QLineSeries();
-    this->pressureChartSeries = new QLineSeries();
+    this->temperatureChartSeries = new QSplineSeries();
+    this->humidityChartSeries = new QSplineSeries();
+    this->insolationChartSeries = new QSplineSeries();
+    this->pressureChartSeries = new QSplineSeries();
 
     temperatureChartSeries->setPen(penT);
     humidityChartSeries->setPen(penH);
@@ -41,7 +45,11 @@ void MainWindow::createSeries(){
 }
 
 
-
+/*!
+ * \brief Metoda tworząca osie czasu i wartości dla wykresów.
+ *
+ * Ustawiany jest również kolor osi.
+ */
 void MainWindow::createAxes(){
     // Temperature
     this->temperatureTimelineAxis = new QValueAxis;
@@ -117,6 +125,13 @@ void MainWindow::createAxes(){
     pressureValueAxis->setLabelsBrush(axisBrush);
     pressureTimelineAxis->setLabelsBrush(axisBrush);
 }
+
+
+/*!
+ * \brief Metoda tworząca wykres, łączy serie danych i osie.
+ *
+ * Nadawany jest również kolor tła, kolor pola wykresu oraz tyuł.
+ */
 
 void MainWindow::makeChart(){
 
@@ -207,13 +222,12 @@ void MainWindow::makeChart(){
     this->pressureChart->addAxis(pressureValueAxis, Qt::AlignLeft);
     this->pressureChart->addAxis(this->pressureTimelineAxis, Qt::AlignBottom);
     this->pressureChart->addSeries(this->pressureChartSeries);
-    this->pressureChart->setTitle("Pressure [hPa]");
     this->pressureChart->legend()->hide();
 
     pressureChart->setBackgroundBrush(backgroundGradient);
     pressureChart->setTitleFont(font);
     pressureChart->setTitleBrush(QBrush(Qt::white));
-    pressureChart->setTitle("Pressure [%]");
+    pressureChart->setTitle("Pressure [hPa]");
 
     // TLO //
     QLinearGradient plotAreaGradientP;
@@ -227,7 +241,9 @@ void MainWindow::makeChart(){
 
 }
 
-
+/*!
+ * \brief Metoda przyporządkowująca serie danych do osi.
+ */
 void MainWindow::attachSeries(){
     this->temperatureChartSeries->attachAxis(this->temperatureTimelineAxis);
     this->temperatureChartSeries->attachAxis(this->temperatureValueAxis);
@@ -242,7 +258,9 @@ void MainWindow::attachSeries(){
     this->pressureChartSeries->attachAxis(this->pressureValueAxis);
 }
 
-
+/*!
+ * \brief Metoda wyśiwetlająca, utworzone wykresy.
+ */
 void MainWindow::showChart(){
     this->temperatureChartView = new QChartView(this->temperatureChart);
     this->temperatureChartView->setRenderHint(QPainter::Antialiasing);
@@ -265,7 +283,11 @@ void MainWindow::showChart(){
     ui->pressureChart_frame->setGeometry(50, 50, 500, 200);
 }
 
-
+/*!
+ * \brief Metoda tworząca wykresy w całości, z innych komponentów klasy.
+ *
+ *  Wykresy są również wyświetlane.
+ */
 void MainWindow::createCharts(){
     this->createSeries();
     this->createAxes();

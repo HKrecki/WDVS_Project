@@ -1,3 +1,9 @@
+/*!
+  * \file
+  * \brief Plik zawierający funkcję główną programu
+  *
+  */
+
 #include "mainwindow.h"
 
 #include <QApplication>

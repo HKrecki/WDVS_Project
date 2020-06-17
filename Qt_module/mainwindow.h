@@ -32,6 +32,10 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
+
+/*!
+ * \brief Klasa, odpowiedzialna za obsługę okna głównego.
+ */
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -306,22 +310,22 @@ private:
     /*!
      * \brief Seria danych, dotyczaca wykresu temperatury.
      */
-    QLineSeries* temperatureChartSeries;
+    QSplineSeries* temperatureChartSeries;
 
     /*!
      * \brief Seria danych, dotyczaca wykresu wilgotności powietrza.
      */
-    QLineSeries* humidityChartSeries;
+    QSplineSeries* humidityChartSeries;
 
     /*!
      * \brief Seria danych, dotycząca wykresu wartości, ciśnienia atmosferycznego.
      */
-    QLineSeries* pressureChartSeries;
+    QSplineSeries* pressureChartSeries;
 
     /*!
      * \brief Seria danych, dotycząca wykresu wartości, nasłonecznienia.
      */
-    QLineSeries* insolationChartSeries;
+    QSplineSeries* insolationChartSeries;
 
     // Osie czasu
 

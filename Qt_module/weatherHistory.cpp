@@ -1,13 +1,19 @@
+/*!
+  * \file
+  * \brief Plik zawirający definicję metody, odpowiedzialnej za wyświetlenie na wykresch, danych
+  * z dni dzisijeszego.
+  *
+  */
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// \brief MainWindow::initWeatherHistory
-/// Wyświetlenie pogody z ostatnich 4 dni
 
 
 void MainWindow::initTodayWeatherCharts()
 {
+    /*!
+     * \brief Struktura zawierająca dane pogodowe z jednego pakietu wartości.
+     */
     struct oneWeatherData{
         double hour;
         double temperature;
