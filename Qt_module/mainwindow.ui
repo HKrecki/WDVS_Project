@@ -56,7 +56,7 @@ QTabWidget::pane { border: 0; }
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <property name="documentMode">
        <bool>true</bool>
@@ -707,6 +707,9 @@ color: rgb(255, 255, 255);</string>
             <pointsize>12</pointsize>
            </font>
           </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(255, 255, 255);</string>
+          </property>
           <property name="title">
            <string>Connection logs</string>
           </property>
@@ -720,7 +723,7 @@ color: rgb(255, 255, 255);</string>
               </size>
              </property>
              <property name="styleSheet">
-              <string notr="true"/>
+              <string notr="true">color: rgb(255, 255, 255);</string>
              </property>
             </widget>
            </item>
@@ -733,6 +736,9 @@ color: rgb(255, 255, 255);</string>
            <font>
             <pointsize>12</pointsize>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(255, 255, 255);</string>
           </property>
           <property name="title">
            <string>Connection status</string>
@@ -770,7 +776,7 @@ color: rgb(255, 255, 255);</string>
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">color: rgb(255, 255, 255);</string>
           </property>
           <property name="title">
            <string>Connection control</string>
@@ -790,7 +796,17 @@ color: rgb(255, 255, 255);</string>
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true"/>
+              <string notr="true">QPushButton:disabled {
+                        background-color:#474747;
+ }
+
+QPushButton:enabled {
+                        background-color:  #737373;
+ }
+
+
+
+</string>
              </property>
              <property name="text">
               <string>Search</string>
@@ -804,6 +820,14 @@ color: rgb(255, 255, 255);</string>
                <width>180</width>
                <height>0</height>
               </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(115, 115, 115);</string>
              </property>
             </widget>
            </item>
@@ -819,6 +843,19 @@ color: rgb(255, 255, 255);</string>
               <font>
                <pointsize>12</pointsize>
               </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton:disabled {
+                        background-color:#474747;
+ }
+
+QPushButton:enabled {
+                        background-color:  #737373;
+ }
+
+
+
+</string>
              </property>
              <property name="text">
               <string>Connect</string>
@@ -838,6 +875,18 @@ color: rgb(255, 255, 255);</string>
                <pointsize>12</pointsize>
               </font>
              </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton:disabled {
+                        background-color:#474747;
+ }
+
+QPushButton:enabled {
+                        background-color:  #737373;
+ }
+
+
+</string>
+             </property>
              <property name="text">
               <string>Disconnect</string>
              </property>
@@ -853,6 +902,9 @@ color: rgb(255, 255, 255);</string>
             <pointsize>12</pointsize>
            </font>
           </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(255, 255, 255);</string>
+          </property>
           <property name="title">
            <string>Connection information</string>
           </property>
@@ -861,7 +913,13 @@ color: rgb(255, 255, 255);</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_4">
            <item row="0" column="0">
-            <widget class="QTextEdit" name="ConnectionInformation_TextEdit"/>
+            <widget class="QTextEdit" name="ConnectionInformation_TextEdit">
+             <property name="font">
+              <font>
+               <pointsize>14</pointsize>
+              </font>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>

@@ -160,9 +160,9 @@ void MainWindow::displayConnectionInformation()
     ui->ConnectionInformation_TextEdit->append("Connection Status:\t" + this->connectionStatus);
     ui->ConnectionInformation_TextEdit->append("Baudrate:\t\t" + this->baudrate);
     ui->ConnectionInformation_TextEdit->append("Data bits:\t\t" + this->dataBits);
-    ui->ConnectionInformation_TextEdit->append("Parity:\t\t" + this->parity);
+    ui->ConnectionInformation_TextEdit->append("Parity:\t\t\t" + this->parity);
     ui->ConnectionInformation_TextEdit->append("Stop bits:\t\t" + this->stopBits);
-    ui->ConnectionInformation_TextEdit->append("Flow control:\t" + this->flowControl);
+    ui->ConnectionInformation_TextEdit->append("Flow control:\t\t" + this->flowControl);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -174,12 +174,12 @@ void MainWindow::setConnectionStatusImage(bool t_connectionStatus)
     QString status = "OFF";
 
     if(t_connectionStatus){
-        status = "ON";
+        status = "On";
     } else{
-        status = "OFF";
+        status = "Off";
     }
 
-    QPixmap pix(":/resources/img/wifi"+status+".png");
+    QPixmap pix(":/resources/img/wifi"+status+"_white.png");
 
     int w = ui->ConnectionStatusImage_Label->width();
     int h = ui->ConnectionStatusImage_Label->height();
